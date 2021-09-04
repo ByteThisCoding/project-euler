@@ -1,0 +1,19 @@
+{
+  "name": "@byte-this/project-euler",
+  "version": "1.0.0",
+  "description": "Solutions for project euler problems",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Byte This!",
+  "license": "ISC",
+  "dependencies": {
+    "@byte-this/collections": "^1.0.4",
+    "@byte-this/funscript": "^1.0.20",
+    "@types/node": "^16.7.10"
+  },
+  "devDependencies": {
+    "typescript": "^4.4.2"
+  }
+}
