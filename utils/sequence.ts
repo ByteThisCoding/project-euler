@@ -37,7 +37,7 @@ export abstract class AbstractSequence<ItemType extends IAbstractSequenceType> {
 
     getItemsInRange(nStart: number, nEnd: number): ItemType[] {
         let items: ItemType[] = [];
-        for (let i=1; i<=nEnd; i++) {
+        for (let i=nStart; i<=nEnd; i++) {
             items.push(this.getNthItem(i));
         }
         return items;
