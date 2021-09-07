@@ -44,6 +44,10 @@ export class Primes extends AbstractSequence<number> {
     }
 
     static isPrime(number: number): boolean {
+        if (number === 1) {
+            return false;
+        }
+
         if (number === 2 || number === 3) {
             return true;
         }

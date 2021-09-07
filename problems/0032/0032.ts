@@ -1,3 +1,4 @@
+import { Combinations } from "../../utils/combinations";
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 
 @RunSolution
@@ -47,7 +48,7 @@ export class Solution32 extends AbstractSolution {
         for (let aCount = 1; aCount <= choices.length - 2; aCount++) {
 
             //get a full list of ints with aCount length
-            const aChoices = this.getNPermutations(aCount, choices);
+            const aChoices = Combinations.getNPermutations(aCount, choices);
 
             //iterate over a choices
             for (let aChoiceIndex = 0; aChoiceIndex < aChoices.length; aChoiceIndex++) {
@@ -64,7 +65,7 @@ export class Solution32 extends AbstractSolution {
                     );
 
                     //get available b choices
-                    const bChoices = this.getNPermutations(bCount, bChoicesAvailable);
+                    const bChoices = Combinations.getNPermutations(bCount, bChoicesAvailable);
 
                     //iterate over b choices
                     for (let bChoiceIndex=0; bChoiceIndex<bChoices.length; bChoiceIndex++) {
@@ -97,31 +98,6 @@ export class Solution32 extends AbstractSolution {
         }
         return Array.from(pandigitals);
     }
-
-    private getNPermutations(n: number, choices: number[]): string[] {
-        if (n === 0) {
-            return [];
-        }
-        if (n === 1) {
-            return choices.map(choice => `${choice}`);
-        }
-
-        let allChoices: string[] = [];
-
-        for (let i = 0; i < choices.length; i++) {
-            const choice = choices[i];
-            const choicesRemaining = choices.filter(rchoice => rchoice !== choice);
-            const subChoices = this.getNPermutations(n - 1, choicesRemaining);
-            subChoices.forEach(substr => {
-                allChoices.push(
-                    `${choice}${substr}`
-                )
-            });
-        }
-
-        return allChoices;
-    }
-
 
     /**
      * 
