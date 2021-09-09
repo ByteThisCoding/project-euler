@@ -1,6 +1,14 @@
 export class Combinations {
 
     public static getNPermutations(n: number, choices: number[]): string[] {
+        return this.doGetNPossibilities(n, choices, true);
+    }
+
+    public static getNPossibilities(n: number, choices: number[]): string[] {
+        return this.doGetNPossibilities(n, choices, false);
+    }
+    
+    private static doGetNPossibilities(n: number, choices: number[], unique: boolean): string[] {
         if (n === 0) {
             return [];
         }
@@ -12,7 +20,10 @@ export class Combinations {
 
         for (let i = 0; i < choices.length; i++) {
             const choice = choices[i];
-            const choicesRemaining = choices.filter(rchoice => rchoice !== choice);
+            const choicesRemaining = unique
+                ? choices.filter(rchoice => rchoice !== choice)
+                : choices;
+
             const subChoices = this.getNPermutations(n - 1, choicesRemaining);
             subChoices.forEach(substr => {
                 allChoices.push(

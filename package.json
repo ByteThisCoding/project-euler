@@ -11,7 +11,8 @@
   "dependencies": {
     "@byte-this/collections": "^1.0.10",
     "@byte-this/funscript": "^1.0.20",
-    "@types/node": "^16.7.10"
+    "@types/node": "^16.7.10",
+    "bigint-isqrt": "^0.2.1"
   },
   "devDependencies": {
     "typescript": "^4.4.2"

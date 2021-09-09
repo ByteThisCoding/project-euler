@@ -1,4 +1,5 @@
 import { AbstractSequence } from "./sequence";
+const sqrt = require('bigint-isqrt');
 
 export class Primes extends AbstractSequence<number> {
 
@@ -43,27 +44,33 @@ export class Primes extends AbstractSequence<number> {
         return this.instance.getNthItem(n);
     }
 
-    static isPrime(number: number): boolean {
-        if (number === 1) {
+    static isPrime(number: number | BigInt): boolean {
+        if (typeof number === 'number') {
+            number = BigInt(number);
+        }
+
+        if (number === 1n) {
             return false;
         }
 
-        if (number === 2 || number === 3) {
+        if (number === 2n || number === 3n) {
             return true;
         }
 
-        const sixMod = number % 6;
-        if (sixMod !== 5 && sixMod !== 1) {
+        //@ts-ignore
+        const sixMod = number % 6n;
+        if (sixMod !== 5n && sixMod !== 1n) {
             return false;
         }
 
         return this.determineIsPrime(number);
     }
 
-    private static determineIsPrime(number: number): boolean {
-        const limit = Math.sqrt(number);
-        for (let i = 2; i <= limit; i++) {
-            if (number % i === 0) {
+    private static determineIsPrime(number: BigInt): boolean {
+        const limit = sqrt(number);
+        for (let i = 2n; i <= limit; i++) {
+            //@ts-ignore
+            if (number % i === 0n) {
                 return false;
             }
         }
