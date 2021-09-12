@@ -48,7 +48,7 @@ export class Solution44 extends AbstractSolution {
      * -----> 2x = n*(3n-1)
      * -----> 2x = 3n^2 - n
      * -----> 3n^2 - n - 2x = 0
-     * -----> Quad Formula: (-b+sqrt(b^2+4ac))/(2a)
+     * -----> Quad Formula: (-b+sqrt(b^2-4ac))/(2a)
      * -----> n = (1+Math.sqrt(1+24*x))/6
      * QualifyP(n) = (1+Math.sqrt(1+24*x))/6 is an integer
      * 1, 5, 12, 22, 35, 51, 70, 92, 117, 145

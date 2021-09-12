@@ -1,3 +1,5 @@
+import { Primes } from "./primes";
+
 export class Integer {
 
     constructor(
@@ -16,6 +18,24 @@ export class Integer {
 
     getUniqueFactors(): Integer[] {
         return this.doGetFactors(true);
+    }
+
+    getNumDistinctPrimes(): number {
+        return Integer.getNumDistinctPrimes(this.value);
+    }
+
+    static getNumDistinctPrimes(n: number): number {
+        let numDistinctPrimes = 0;
+        let lastPrime = 0;
+
+        for (let primeIndex = 1; lastPrime <= n; primeIndex++) {
+            lastPrime = Primes.getNthPrime(primeIndex);
+            if (n % lastPrime === 0) {
+                numDistinctPrimes ++;
+            }
+        }
+
+        return numDistinctPrimes;
     }
 
     private doGetFactors(unique: boolean): Integer[] {
