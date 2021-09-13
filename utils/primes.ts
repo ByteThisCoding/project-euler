@@ -44,6 +44,29 @@ export class Primes extends AbstractSequence<number> {
         return this.instance.getNthItem(n);
     }
 
+    static getNthPrimeIndex(prime: number): number {
+        return this.instance.getIndexOfItem(prime);
+    }
+
+    static getPrimesInRange(startIndex: number, endIndex: number): number[] {
+        return this.instance.getItemsInRange(startIndex, endIndex);
+    }
+
+    static getSumOfPrimesInRange(startIndex: number, endIndex: number): number {
+        return this.instance.getSumOfRange(startIndex, endIndex);
+    }
+
+    static getClosestLowerPrime(n: number): number {
+
+        let prevPrime = -1;
+        let lastPrime = 2;
+        for (let i=2; lastPrime < n; i++) {
+            prevPrime = lastPrime;
+            lastPrime = this.getNthPrime(i);
+        }
+        return prevPrime;
+    }
+
     static isPrime(number: number | BigInt): boolean {
         if (typeof number === 'number') {
             number = BigInt(number);

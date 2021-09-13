@@ -5,7 +5,7 @@ import { AbstractSolution, RunSolution } from "../../utils/solution";
 export class Solution46 extends AbstractSolution {
 
     getProblemName(): string {
-        return "Goldbach's other conjecture";
+        return "Goldbach's Other Conjecture";
     }
 
     protected solve() {
@@ -26,12 +26,17 @@ export class Solution46 extends AbstractSolution {
         if (n < 4) {
             return false;
         }
+        const sqrt = Math.sqrt(n);
 
         let lastPrime = 0;
-        for (let primeIndex = 1; lastPrime < n-1; primeIndex++) {
+        for (let primeIndex = 1; lastPrime <= sqrt; primeIndex++) {
             lastPrime = Primes.getNthPrime(primeIndex);
 
             if (this.isDoublePerfectSquare(n - lastPrime)) {
+                return true;
+            }
+            const diff = n - lastPrime;
+            if (Primes.isPrime(diff) && this.isDoublePerfectSquare(n - diff)) {
                 return true;
             }
             

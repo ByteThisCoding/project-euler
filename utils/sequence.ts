@@ -28,13 +28,21 @@ export abstract class AbstractSequence<ItemType extends IAbstractSequenceType> {
     }
 
     existsInSequence(item: ItemType): boolean {
+        return this.getIndexOfItem(item) > -1;
+    }
+
+    getIndexOfItem(item: ItemType): number {
         //generate items until we reach the item to compare
         while (this.compareItems(this.getNthItem(this.items.length), item) < 0) {
             this.getNthItem(this.items.length + 1);
         }
 
         const itemIndex = this.binarySearch(item);
-        return this.compareItems(item, this.items[itemIndex]) === 0;
+        if (this.compareItems(item, this.items[itemIndex]) === 0) {
+            return itemIndex + 1;
+        }
+
+        return -1;
     }
 
     getSumOfRange(nStart: number, nEnd: number): ItemType {
