@@ -42,14 +42,10 @@ export class Combinations {
                 ? choices.filter(rchoice => rchoice !== choice)
                 : choices;
 
-            const subChoices = this.getNPermutations(n - 1, choicesRemaining);
-            for (let sIndex = 0; sIndex < subChoices.length; sIndex++) {
-                const substr = subChoices[sIndex];
-                const response = callback(`${choice}${substr}`);
-                if (response === false) {
-                    return;
-                }
-            }
+            
+            this.doForEachNPossibilities(n - 1, choicesRemaining, unique, (substr) => {
+                return callback(`${choice}${substr}`);
+            });
         }
     }
 

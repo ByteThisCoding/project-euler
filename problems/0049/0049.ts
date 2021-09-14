@@ -41,7 +41,6 @@ export class Solution49 extends AbstractSolution {
 
 
         let lastSecondPrimeValue = 0;
-        //let forLimit = 2 * (10000 - firstPrime) / 3;
         const forLimit = 10000;
         const startIndex = Primes.getNthPrimeIndex(firstPrime) + 1;
         for (let secondPrimeIndex = startIndex; lastSecondPrimeValue < forLimit; secondPrimeIndex++) {
