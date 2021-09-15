@@ -18,31 +18,28 @@ export class Solution51 extends AbstractSolution {
     private permSolve(familySize: number): number {
         let minSolution = -1;
         for (let n = 2; minSolution === -1; n++) {
-            console.log("Looing in n digits: ", n);
+            console.log("Looking in n digits: ", n);
 
             this.forEachPossibility(n, (perm: string) => {
-                if (minSolution === -1) {
+                let numInFamily = 0;
+                let lastPrime = 0;
 
-                    let numInFamily = 0;
-                    let lastPrime = 0;
+                for (let rep = 9; rep >= familySize - numInFamily; rep--) {
+                    const newNum = perm.replace(/\*/g, rep + "");
 
-                    for (let rep = 9; rep >= familySize - numInFamily; rep--) {
-                        const newNum = perm.replace(/\*/g, rep + "");
-
-                        if (newNum[0] !== '0') {
-                            const num = parseInt(newNum);
-                            if (this.isPrime(num)) {
-                                numInFamily++;
-                                lastPrime = num;
-                            }
+                    if (newNum[0] !== "0") {
+                        const num = parseInt(newNum);
+                        if (this.isPrime(num)) {
+                            numInFamily++;
+                            lastPrime = num;
                         }
                     }
+                }
 
-                    if (numInFamily === familySize) {
-                        minSolution = lastPrime;
-                        //we stop generating possibilities by returning false
-                        return false;
-                    }
+                if (numInFamily === familySize) {
+                    minSolution = lastPrime;
+                    //we stop generating possibilities by returning false
+                    return false;
                 }
             });
 
@@ -62,11 +59,20 @@ export class Solution51 extends AbstractSolution {
     private forEachPossibility(n: number, callback: (perm: string) => any): void {
         Combinations.forEachNPossibilities(n - 1, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, '*'], (subPerm: string) => {
             if (subPerm[0] !== "0" && subPerm.indexOf("*") > -1) {
-                const firstVal = callback(`${subPerm}3`);
-                if (firstVal === false) {
+                let resp;
+                resp = callback(`${subPerm}1`);
+                if (resp === false) {
                     return false;
                 }
-                return callback(`${subPerm}7`);
+                resp = callback(`${subPerm}3`);
+                if (resp === false) {
+                    return false;
+                }
+                resp = callback(`${subPerm}7`);
+                if (resp === false) {
+                    return false;
+                }
+                return callback(`${subPerm}9`);
             }
         });
     }

@@ -1,5 +1,21 @@
 export class Combinations {
 
+    public static chooseNFromRCount(n: bigint, r: bigint): bigint {
+        const nMinusR = n - r;
+        const small = nMinusR < n ? nMinusR : n;
+        const big = r === small ? nMinusR : r;
+        return this.factorialOf(n, big) / this.factorialOf(small);
+    }
+
+    public static factorialOf(n: bigint, div: bigint = 1n): bigint {
+        let product = 1n;
+        for (let m=div+1n; m<=n; m++) {
+            product *= m;
+        }
+        return product;
+    }
+
+
     public static forEachNPermutations(n: number, choices: (number | string)[], callback: (perm: string) => any): void {
         this.doForEachNPossibilities(n, choices, true, callback);
     }
@@ -34,17 +50,17 @@ export class Combinations {
             }
         }
 
-        //let allChoices: string[] = [];
+        let keepGoing = true;
 
-        for (let i = 0; i < choices.length; i++) {
+        for (let i = 0; keepGoing && i < choices.length; i++) {
             const choice = choices[i];
             const choicesRemaining = unique
                 ? choices.filter(rchoice => rchoice !== choice)
                 : choices;
-
             
             this.doForEachNPossibilities(n - 1, choicesRemaining, unique, (substr) => {
-                return callback(`${choice}${substr}`);
+                keepGoing = callback(`${choice}${substr}`) === false ? false : true;
+                return keepGoing;
             });
         }
     }
