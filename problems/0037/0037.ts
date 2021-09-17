@@ -118,7 +118,7 @@ export class Solution37 extends AbstractSolution {
         const isPrime = Primes.isPrime(BigInt(subNstr));
         this.primeCache.set(subNstr, isPrime);
         return isPrime;*/
-        return Primes.isPrime(BigInt(subNstr));
+        return Primes.isPrimeBigInt(BigInt(subNstr));
     }
 
 }
