@@ -67,21 +67,22 @@ export class Primes extends AbstractSequence<number> {
         return prevPrime;
     }
 
-    static isPrime(number: number/* | bigint*/): boolean {
-        /*if (typeof number === 'number') {
-            number = BigInt(number);
+    static isPrime(number: number): boolean {
+
+        /*if (this.instance.items[this.instance.items.length - 1] >= number) {
+            return this.instance.existsInSequence(number);
         }*/
 
-        if (number === 1/*n*/) {
+        if (number === 1) {
             return false;
         }
 
-        if (number === 2/*n*/ || number === 3/*n*/) {
+        if (number === 2 || number === 3) {
             return true;
         }
 
-        const sixMod = number % 6/*n*/;
-        if (sixMod !== 5/*n*/ && sixMod !== 1/*n*/) {
+        const sixMod = number % 6;
+        if (sixMod !== 5 && sixMod !== 1) {
             return false;
         }
 
@@ -107,7 +108,12 @@ export class Primes extends AbstractSequence<number> {
 
     private static determineIsPrime(number: number): boolean {
         const limit = Math.sqrt(number);
-        for (let i = 2; i <= limit; i++) {
+
+        if (number % 2 === 0) {
+            return false;
+        }
+
+        for (let i = 3; i <= limit; i+=2) {
             if (number % i === 0) {
                 return false;
             }
@@ -117,7 +123,12 @@ export class Primes extends AbstractSequence<number> {
 
     private static determineIsPrimeBigInt(number: bigint): boolean {
         const limit = sqrt(number);
-        for (let i = 2n; i <= limit; i++) {
+
+        if (number % 2n === 0n) {
+            return false;
+        }
+
+        for (let i = 3n; i <= limit; i+=2n) {
             if (number % i === 0n) {
                 return false;
             }

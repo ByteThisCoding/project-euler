@@ -9,7 +9,7 @@ export type IAbstractSequenceType =
 
 export abstract class AbstractSequence<ItemType extends IAbstractSequenceType> {
 
-    private readonly items: ItemType[] = [];
+    protected readonly items: ItemType[] = [];
 
     constructor() {
         this.items = this.getInitialSequenceItems();
