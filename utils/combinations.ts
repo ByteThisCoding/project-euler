@@ -55,7 +55,7 @@ export class Combinations {
         for (let i = 0; keepGoing && i < choices.length; i++) {
             const choice = choices[i];
             const choicesRemaining = unique
-                ? choices.filter(rchoice => rchoice !== choice)
+                ? choices.filter((rchoice, index) => index !== i)
                 : choices;
             
             this.doForEachNPossibilities(n - 1, choicesRemaining, unique, (substr) => {

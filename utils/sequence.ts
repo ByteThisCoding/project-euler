@@ -38,8 +38,8 @@ export abstract class AbstractSequence<ItemType extends IAbstractSequenceType> {
         }
 
         const itemIndex = this.binarySearch(item);
-        if (this.compareItems(item, this.items[itemIndex]) === 0) {
-            return itemIndex + 1;
+        if (itemIndex.isMatch) {
+            return itemIndex.index + 1;
         }
 
         return -1;
@@ -61,6 +61,25 @@ export abstract class AbstractSequence<ItemType extends IAbstractSequenceType> {
         return items;
     }
 
+    getItemsInValueRange(nStart: ItemType, nEnd: ItemType): ItemType[] {
+        while (this.compareItems(this.getNthItem(this.items.length), nEnd) < 0) {
+            this.getNthItem(this.items.length + 1);
+        }
+
+        let startIndex = this.binarySearch(nStart).index;
+        let endIndex = this.binarySearch(nEnd).index;
+
+        if (this.compareItems(this.items[startIndex], nStart) < 0) {
+            startIndex++;
+        }
+
+        if (this.compareItems(this.items[endIndex], nEnd) > 0) {
+            endIndex--;
+        }
+        
+        return this.getItemsInRange(startIndex+1, endIndex+1);
+    }
+
     private addItems(a: ItemType, b: ItemType): ItemType {
         switch (typeof a) {
             case 'string':
@@ -80,7 +99,7 @@ export abstract class AbstractSequence<ItemType extends IAbstractSequenceType> {
     /**
     * This example shows how we can implement a binary search to find a string within a sorted array
     */
-    private binarySearch(item: ItemType): number {
+    private binarySearch(item: ItemType): {index: number; isMatch: boolean;} {
         //we will begin by including all elements in the array for consideration
         let start = 0;
         let end = this.items.length;
@@ -93,7 +112,10 @@ export abstract class AbstractSequence<ItemType extends IAbstractSequenceType> {
 
             //if the position is already the end element, we're done looking, item doesn't exist in ar
             if (pos >= end) {
-                return -1;
+                return {
+                    index: pos,
+                    isMatch: false
+                };
             }
 
             //compare the string we're looking for to the item in ar[pos]
@@ -101,7 +123,10 @@ export abstract class AbstractSequence<ItemType extends IAbstractSequenceType> {
 
             //if we've found our item, return the pos
             if (comp === 0) {
-                return pos;
+                return {
+                    index: pos,
+                    isMatch: true
+                };
             }
 
             //if the item is lesser in our comparison
