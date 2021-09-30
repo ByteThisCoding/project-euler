@@ -1,3 +1,4 @@
+import { BigIntUtils } from "./bigint-utils";
 import { Primes } from "./primes";
 
 export class Integer {
@@ -12,12 +13,87 @@ export class Integer {
         );
     }
 
+    static getFactors(n: number): number[] {
+        return this.doGetFactors(n, false);
+    }
+
+    static getUniqueFactors(n: number): number[] {
+        return this.doGetFactors(n, true);
+    }
+
+    static getUniquePrimeFactors(n: number): number[] {
+        return this.doGetPrimeFactors(n, true);
+    }
+
+    private static doGetFactors(n: number, unique: boolean): number[] {
+        const factors: number[] = [1, n];
+
+        const numLimit: number = Math.sqrt(n);
+        for (let i=2; i<=numLimit; i++) {
+            if (n % i === 0) {
+                factors.push(i);
+                if (!unique || i !== n / i) {
+                    factors.push(n / i);
+                }
+            }
+        }
+
+        factors.sort((a, b) => a - b);
+        return factors;
+    }
+
+    private static doGetPrimeFactors(n: number, unique: boolean): number[] {
+        const factors: number[] = [];
+
+        const numLimit: number = Math.sqrt(n);
+        for (let i=2; i<=numLimit; i++) {
+            if (n % i === 0 && Primes.isPrime(i)) {
+                factors.push(i);
+                if ((!unique || i !== n / i) && Primes.isPrime(n / i)) {
+                    factors.push(n / i);
+                }
+            }
+        }
+
+        factors.sort((a, b) => a - b);
+        return factors;
+    }
+
+    static getFactorsBigInt(n: bigint): bigint[] {
+        return this.doGetFactorsBigInt(n, false);
+    }
+
+    static getUniqueFactorsBigInt(n: bigint): bigint[] {
+        return this.doGetFactorsBigInt(n, true);
+    }
+
+    private static doGetFactorsBigInt(n: bigint, unique: boolean): bigint[] {
+        const factors: bigint[] = [1n, n];
+
+        const numLimit: bigint = BigIntUtils.sqrt(n);
+        for (let i=2n; i<=numLimit; i++) {
+            if (n % i === 0n) {
+                factors.push(i);
+                if (!unique || i !== n / i) {
+                    factors.push(n / i);
+                }
+            }
+        }
+
+        factors.sort((a, b) => Number(a - b));
+        return factors;
+    }
+
     getFactors(): Integer[] {
-        return this.doGetFactors(false);
+        return Integer.doGetFactors(this.value, false).map(val => new Integer(val));
     }
 
     getUniqueFactors(): Integer[] {
-        return this.doGetFactors(true);
+        return Integer.doGetFactors(this.value, true).map(val => new Integer(val));
+    }
+
+    getUniquePrimeFactors(): Integer[] {
+        return Integer.doGetPrimeFactors(this.value, true).map(val => new Integer(val));
     }
 
     getNumDistinctPrimes(): number {
@@ -36,25 +112,6 @@ export class Integer {
         }
 
         return numDistinctPrimes;
-    }
-
-    private doGetFactors(unique: boolean): Integer[] {
-        const factors: number[] = [1, this.value];
-
-        const numLimit: number = Math.sqrt(this.value);
-        for (let i=2; i<=numLimit; i++) {
-            if (this.value % i === 0) {
-                factors.push(i);
-                if (!unique || i !== this.value / i) {
-                    factors.push(this.value / i);
-                }
-            }
-        }
-
-        factors.sort((a, b) => a - b);
-        return factors.map(item => {
-            return new Integer(item);
-        });
     }
 
     getCommonFactors(integer: Integer): Integer[] {

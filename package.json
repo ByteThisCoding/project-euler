@@ -9,9 +9,10 @@
   "author": "Byte This!",
   "license": "ISC",
   "dependencies": {
-    "@byte-this/collections": "^1.0.10",
+    "@byte-this/collections": "^1.0.11",
     "@byte-this/funscript": "^1.0.20",
     "@types/node": "^16.7.10",
+    "bigint-is-perfect-square": "^0.1.0",
     "bigint-isqrt": "^0.2.1"
   },
   "devDependencies": {

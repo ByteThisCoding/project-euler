@@ -1,4 +1,5 @@
 const sqrt = require('bigint-isqrt');
+
 export class BigIntUtils {
 
     public static gcd(...integers: bigint[]): bigint {
@@ -15,6 +16,39 @@ export class BigIntUtils {
 
     public static sqrt(n: bigint): bigint {
         return sqrt(n);
+    }
+
+    public static isPerfectSquare(n: bigint): boolean {
+        const lastDigit = n % 10n;
+        if ([0n, 1n, 4n, 5n, 6n, 9n].indexOf(lastDigit) === -1) {
+            return false;
+        }
+
+        /*const root = this.getDigitalRoot(n);
+        if ([1n, 4n, 7n, 9n].indexOf(root) === -1) {
+            return false;
+        }*/
+
+        while ((n & 3n) === 0n && n !== 0n){
+            n >>= 2n;
+        }
+        // So, for now x is not divisible by 2
+        // The only possible residual modulo 8 for such x is 1
+     
+        if ((n & 7n) !== 1n){
+            return false;
+        }
+        return n === this.sqrt(n)**2n;
+    }
+
+    public static getDigitalRoot(n: bigint): bigint {
+        let root = n;
+        while (root > 9n) {
+            root = Array.from(root.toString()).reduce((acc, char) => {
+                return acc + BigInt(char);
+            }, 0n);
+        }
+        return root;
     }
 
     public static abs(n: bigint): bigint {
