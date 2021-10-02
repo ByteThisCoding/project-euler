@@ -2,7 +2,7 @@ import { Integer } from "../../utils/integer";
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 
 @RunSolution
-class Solution4 extends AbstractSolution {
+export class Solution4 extends AbstractSolution {
     getProblemName(): string {
         return "Largest Palindrome Product";
     }

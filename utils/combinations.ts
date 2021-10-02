@@ -65,4 +65,30 @@ export class Combinations {
         }
     }
 
+    public static areDigitsPermutations(a: number, b: number): boolean {
+
+        //reduce by 10s and count digits up and down
+        const digitAr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+        while (a > 10) {
+            digitAr[a % 10]++;
+            a = Math.floor(a / 10);
+        }
+        digitAr[a % 10]++;
+
+        while (b > 10) {
+            digitAr[b % 10]--;
+            b = Math.floor(b / 10);
+        }
+        digitAr[b % 10]--;
+
+        for (let i = 0; i < 10; i++) {
+            if (digitAr[i] !== 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }

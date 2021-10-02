@@ -2,7 +2,7 @@ import { Primes } from "../../utils/primes";
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 
 @RunSolution
-class Solution10 extends AbstractSolution {
+export class Solution10 extends AbstractSolution {
 
     getProblemName(): string {
         return "Summation of Primes";

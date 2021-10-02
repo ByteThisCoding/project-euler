@@ -1,5 +1,4 @@
 import { iSortedList, SortedArray } from "@byte-this/collections";
-import { Equals } from "@byte-this/funscript";
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 
 @RunSolution
@@ -62,7 +61,6 @@ export class Solution26 extends AbstractSolution {
                 index: prevValues.index + 1
             };
             
-            //if (!!seqValues.find(item => Equals(item, newEntry))) {
             if (seqValues.contains(newEntry)) {
                 break;
             } else {
@@ -72,8 +70,6 @@ export class Solution26 extends AbstractSolution {
         }
 
         return seqValues.length;
-        /*return seqValues.toArray().sort((a, b) => a.index - b.index)
-            .map(item => item.seqDigit);*/
     }
 
     /***

@@ -1,4 +1,4 @@
-import { Equals } from "@byte-this/funscript";
+import { Combinations } from "../../utils/combinations";
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 
 @RunSolution
@@ -22,12 +22,10 @@ export class Solution52 extends AbstractSolution {
 
 
     private isValidPerm(x: number, limit: number): boolean {
-        const xDigits = Array.from(x.toString()).sort();
 
         for (let i=limit; i>1; i--) {
             const xMultiple = x*i;
-            const xmDigits = Array.from(xMultiple.toString()).sort();
-            if (!Equals(xDigits, xmDigits)) {
+            if (!Combinations.areDigitsPermutations(x, xMultiple)) {
                 return false;
             }
         }

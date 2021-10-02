@@ -1,7 +1,7 @@
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 
 @RunSolution
-class Solution0003 extends AbstractSolution {
+export class Solution0003 extends AbstractSolution {
 
     getProblemName(): string {
         return "Largest Prime Factor";

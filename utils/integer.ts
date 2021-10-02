@@ -43,16 +43,21 @@ export class Integer {
     }
 
     private static doGetPrimeFactors(n: number, unique: boolean): number[] {
-        const factors: number[] = [];
+        const factors: number[] = [1];
 
         const numLimit: number = Math.sqrt(n);
         for (let i=2; i<=numLimit; i++) {
             if (n % i === 0 && Primes.isPrime(i)) {
                 factors.push(i);
-                if ((!unique || i !== n / i) && Primes.isPrime(n / i)) {
-                    factors.push(n / i);
-                }
             }
+
+            if ((!unique || i !== n / i) && Primes.isPrime(n / i)) {
+                factors.push(n / i);
+            }
+        }
+
+        if (Primes.isPrime(n)) {
+            factors.push(n);
         }
 
         factors.sort((a, b) => a - b);

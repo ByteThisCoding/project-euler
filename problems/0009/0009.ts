@@ -1,7 +1,7 @@
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 
 @RunSolution
-class Solution9 extends AbstractSolution {
+export class Solution9 extends AbstractSolution {
 
     getProblemName(): string {
         return "Special Pythagorean Triplet";

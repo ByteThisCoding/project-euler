@@ -12,3 +12,4 @@ When the work is concluded, users will be able to view all of my solutions to th
 1. Finish solving all 100 problems.
 2. Finish editing and publishing all 100 videos.
 3. Create the integration so www.bytethisstore.com can enumerate one individual page for each problem. The website will integrate with Git and possibly YouTube to accomplish this.
+4. Enhance the integration to display metrics, including execution time required for each solution. From there, determine which problems should be revisited to be further optimized.

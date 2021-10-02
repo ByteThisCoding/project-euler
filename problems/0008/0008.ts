@@ -1,7 +1,7 @@
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 
 @RunSolution
-class Solution8 extends AbstractSolution {
+export class Solution8 extends AbstractSolution {
 
     readonly INPUT = `
     73167176531330624919225119674426574742355349194934

@@ -1,7 +1,7 @@
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 
 @RunSolution
-class Solution11 extends AbstractSolution {
+export class Solution11 extends AbstractSolution {
 
     private readonly INPUT = `
     08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08

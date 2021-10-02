@@ -1,4 +1,5 @@
 import { Equals } from "@byte-this/funscript";
+import { Combinations } from "../../utils/combinations";
 import { Primes } from "../../utils/primes";
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 
@@ -30,12 +31,7 @@ export class Solution49 extends AbstractSolution {
 
     private getSequenceFromPrime(firstPrime: number): string | null {
         //do not generate example sequence from problem
-        /*if (firstPrime === 1487) {
-            return null;
-        }*/
-
-        const firstPrimeDigits = this.getSortedUniqueDigits(firstPrime);
-        if (firstPrimeDigits.length < 4) {
+        if (firstPrime < 1000) {
             return null;
         }
 
@@ -49,19 +45,12 @@ export class Solution49 extends AbstractSolution {
             lastSecondPrimeValue = Primes.getNthPrime(secondPrimeIndex);
             const interval = lastSecondPrimeValue - firstPrime;
 
-            /*if (firstPrime === 1487) {
-                console.log({firstPrime, lastSecondPrimeValue, interval, forLimit});
-            }*/
-
-            const seqTwoDigits = this.getSortedUniqueDigits(lastSecondPrimeValue);
-            if (!Equals(firstPrimeDigits, seqTwoDigits)) {
+            if (!Combinations.areDigitsPermutations(firstPrime, lastSecondPrimeValue)) {
                 isValid = false;
             } else {
-                //console.log("Partial found:", {firstPrime, lastSecondPrimeValue, interval});
-
                 const seqThree = lastSecondPrimeValue + interval;
-                const seqThreeDigits = this.getSortedUniqueDigits(seqThree);
-                if (seqThree >= 10000 || !Primes.isPrime(seqThree) || !Equals(firstPrimeDigits, seqThreeDigits)) {
+                
+                if (seqThree >= 10000 || !Primes.isPrime(seqThree) || !Combinations.areDigitsPermutations(firstPrime, seqThree)) {
                     isValid = false;
                 }
 
@@ -77,12 +66,6 @@ export class Solution49 extends AbstractSolution {
         }
 
         return null;
-    }
-
-    private getSortedUniqueDigits(n: number): string[] {
-        return Array.from(`${n}`)
-            .sort((a, b) => a.localeCompare(b))
-            //.filter((char, index, ar) => ar.indexOf(char) === index);
     }
 
 }

@@ -1,7 +1,7 @@
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 
 @RunSolution
-class Solution6 extends AbstractSolution {
+export class Solution6 extends AbstractSolution {
 
     getProblemName(): string {
         return "Sum Square Difference";

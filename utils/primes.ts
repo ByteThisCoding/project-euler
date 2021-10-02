@@ -56,6 +56,10 @@ export class Primes extends AbstractSequence<number> {
         return this.instance.getSumOfRange(startIndex, endIndex);
     }
 
+    static getPrimesInValueRange(startValue: number, endValue: number): number[] {
+        return this.instance.getItemsInValueRange(startValue, endValue);
+    }
+
     static getClosestLowerPrime(n: number): number {
 
         let prevPrime = -1;

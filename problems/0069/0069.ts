@@ -1,6 +1,7 @@
 import { Integer } from "../../utils/integer";
 import { Primes } from "../../utils/primes";
 import { AbstractSolution, RunSolution } from "../../utils/solution";
+import { Totient } from "../../utils/totient";
 
 @RunSolution
 export class Solution69 extends AbstractSolution {
@@ -20,7 +21,7 @@ export class Solution69 extends AbstractSolution {
         let maxRatio = 0;
 
         for (let n=2; n<=limit; n++) {
-            const totient = this.totientOfN(n);
+            const totient = Totient.getTotientOfN(n);
             const ratio = n/totient;
             if (ratio > maxRatio) {
                 maxN = n;
@@ -29,22 +30,6 @@ export class Solution69 extends AbstractSolution {
         }
 
         return maxN;
-    }
-
-    private totientOfN(n: number): number {
-        //const factors = Integer.getUniqueFactors(n);
-        //const primeFactors = factors.filter(factor => Primes.isPrime(factor));
-        const primeFactors = Integer.getUniquePrimeFactors(n);
-
-        //console.log(primeFactors);
-
-        let product = n;
-        for (let i=0; i<primeFactors.length; i++) {
-            product *= (1 - 1/primeFactors[i]);
-        }
-
-        return Math.floor(product);
-
     }
 
 }

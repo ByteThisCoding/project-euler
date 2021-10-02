@@ -3,7 +3,7 @@ import { Primes } from "../../utils/primes";
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 
 @RunSolution
-class Solution5 extends AbstractSolution {
+export class Solution5 extends AbstractSolution {
 
     getProblemName(): string {
         return "Smallest Multiple";
