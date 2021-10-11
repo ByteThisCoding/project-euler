@@ -65,7 +65,7 @@ export class Solution66 extends AbstractSolution {
             let numerator = -1n*lastItem.remainder[0]*lastItem.remainder[1];
             let denominator = diff;
 
-            const gcd = BigIntUtils.abs(BigIntUtils.gcd(lastItem.remainder[1], denominator));
+            const gcd = BigIntUtils.abs(BigIntUtils.gcdTwoNums(lastItem.remainder[1], denominator));
 
             const numeratorOffset = numerator+floorSqrtN*lastItem.remainder[1];
             const aTerm = numeratorOffset/denominator;

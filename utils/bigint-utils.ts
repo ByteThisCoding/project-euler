@@ -1,3 +1,5 @@
+import { BigIntFraction } from "./bigint-fraction";
+
 const sqrt = require('bigint-isqrt');
 
 export class BigIntUtils {
@@ -7,11 +9,15 @@ export class BigIntUtils {
             return integers[0];
         }
         if (integers.length === 2) {
-            return integers[1] ? BigIntUtils.gcd(integers[1], integers[0] % integers[1]) : integers[0];
+            return integers[1] ? BigIntUtils.gcdTwoNums(integers[1], integers[0] % integers[1]) : integers[0];
         }
 
-        const firstTwo = BigIntUtils.gcd(integers[0], integers[1]);
+        const firstTwo = BigIntUtils.gcdTwoNums(integers[0], integers[1]);
         return BigIntUtils.gcd(firstTwo, ...[...integers].splice(2));
+    }
+
+    static gcdTwoNums(a: bigint, b: bigint): bigint {
+        return b ? BigIntUtils.gcdTwoNums(b, a % b) : a;
     }
 
     public static sqrt(n: bigint): bigint {

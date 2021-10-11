@@ -1,3 +1,5 @@
+import { BigIntUtils } from "./bigint-utils";
+
 /**
 * We also include some static methods to help us with implementations
 * + static methods for operating over arrays of fractions
@@ -141,28 +143,13 @@ export class BigIntFraction {
     * Then, return results
     */
     private reduce(numerator: bigint, denominator: bigint): [bigint, bigint] {
-        const gcd = BigIntFraction.gcd(numerator, denominator);
+        const gcd = BigIntUtils.gcdTwoNums(numerator, denominator);
         return [numerator / gcd, denominator / gcd];
     }
 
     //some static utility functions and properties
     static readonly ZERO: BigIntFraction = new BigIntFraction(0n, 1n);
     static readonly ONE: BigIntFraction = new BigIntFraction(1n, 1n);
-
-    /**
-    * Get the greatest common denominator
-    */
-    static gcd(...integers: bigint[]): bigint {
-        if (integers.length === 1) {
-            return integers[0];
-        }
-        if (integers.length === 2) {
-            return integers[1] ? BigIntFraction.gcd(integers[1], integers[0] % integers[1]) : integers[0];
-        }
-
-        const firstTwo = BigIntFraction.gcd(integers[0], integers[1]);
-        return BigIntFraction.gcd(firstTwo, ...[...integers].splice(2));
-    }
 
     /**
     * Get the least common multiple
@@ -172,7 +159,7 @@ export class BigIntFraction {
             return integers[0];
         }
         if (integers.length === 2) {
-            return (integers[0]*integers[1])/BigIntFraction.gcd(...integers);
+            return (integers[0]*integers[1])/BigIntUtils.gcd(...integers);
         }
 
         const firstTwo = BigIntFraction.lcm(integers[0], integers[1]);

@@ -141,7 +141,7 @@ export class Fraction {
     * Then, return results
     */
     private reduce(numerator: number, denominator: number): [number, number] {
-        const gcd = Fraction.gcd(numerator, denominator);
+        const gcd = Fraction.gcdTwoNums(numerator, denominator);
         return [numerator / gcd, denominator / gcd];
     }
 
@@ -157,11 +157,15 @@ export class Fraction {
             return integers[0];
         }
         if (integers.length === 2) {
-            return integers[1] ? Fraction.gcd(integers[1], integers[0] % integers[1]) : integers[0];
+            return this.gcdTwoNums(integers[0], integers[1]);
         }
 
-        const firstTwo = Fraction.gcd(integers[0], integers[1]);
+        const firstTwo = this.gcdTwoNums(integers[0], integers[1]);
         return Fraction.gcd(firstTwo, ...[...integers].splice(2));
+    }
+
+    static gcdTwoNums(a: number, b: number): number {
+        return b ? Fraction.gcdTwoNums(b, a % b) : a;
     }
 
     /**

@@ -1,4 +1,5 @@
 import { BigIntFraction } from "../../utils/bigint-fraction";
+import { BigIntUtils } from "../../utils/bigint-utils";
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 
 @RunSolution
@@ -21,14 +22,6 @@ export class Solution71 extends AbstractSolution {
         //const searchLeftFrac = new BigIntFraction(3n, 7n);
 
         const numMultiply = limit/7n;
-
-        /*let workingNum = 2n;
-        let workingDen = 5n;
-
-        while (workingDen < limit) {
-            workingNum += 3n;
-            workingDen += 7n;
-        }*/
 
         return 2n + 3n*(numMultiply-1n);
     }
@@ -85,7 +78,7 @@ export class Solution71 extends AbstractSolution {
     private getCoprimeNumerators(denom: bigint): bigint[] {
         const nums: bigint[] = [1n];
         for (let n=2n; n<denom; n++) {
-            if (BigIntFraction.gcd(n, denom) === 1n) {
+            if (BigIntUtils.gcd(n, denom) === 1n) {
                 nums.push(n);
             }
         }

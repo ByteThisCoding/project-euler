@@ -41,13 +41,12 @@ export class Solution23 extends AbstractSolution {
     }
 
     private isAbundant(n: number): boolean {
-        const factors = new Integer(n).getUniqueFactors();
-        const factorSum = factors.reduce((acc, int) => {
-            if (int.value === n) {
-                return acc;
-            }
-            return acc + int.value;
-        }, 0);
+        const factors = Integer.getUniqueFactors(n);
+        
+        let factorSum = 0;
+        for (let i=0; factorSum <= n && i<factors.length-1; i++) {
+            factorSum += factors[i];
+        }
 
         return factorSum > n;
     }

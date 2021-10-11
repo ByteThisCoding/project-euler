@@ -33,6 +33,8 @@ export class Totient {
     }
 
     public static getTotientsUpTo(endNum: number): number[] {
+        endNum += 1;
+
         let phis: Fraction[] = new Array(endNum + 1)
             .fill(0)
             .map((_, ind) => new Fraction(ind, 1));
@@ -53,8 +55,6 @@ export class Totient {
                 phis[prime * i] = product;
             }
         }
-    
-        phis[phis.length - 1] = new Fraction(this.getTotientOfN(endNum), 1);
     
         return phis.map(frac => frac.getNumerator());
     }
