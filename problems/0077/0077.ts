@@ -30,18 +30,22 @@ export class Solution77 extends AbstractSolution {
                 return newAr;
             });
 
+        //helper to calculate a particular matrix value given previous values
+        const calcMatrixValue = (rowIndex: number, colIndex: number): number => {
+            let cellValue = matrix[rowIndex - 1][colIndex];
+
+            if (colIndex >= coins[rowIndex - 1]) {
+                cellValue += matrix[rowIndex][colIndex - coins[rowIndex - 1]];
+            }
+
+            return cellValue;
+        }
+
         //fill in default matrix
         for (let rowIndex = 1; rowIndex < matrix.length; rowIndex ++) {
-
             for (let colIndex = 1; colIndex <= coins[coins.length - 1]; colIndex++) {
-
-                let cellValue = matrix[rowIndex - 1][colIndex];
-
-                if (colIndex >= coins[rowIndex - 1]) {
-                    cellValue += matrix[rowIndex][colIndex - coins[rowIndex - 1]];
-                }
-
-                matrix[rowIndex][colIndex] = cellValue;
+                
+                matrix[rowIndex][colIndex] = calcMatrixValue(rowIndex, colIndex);
             }
         }
 
@@ -69,18 +73,12 @@ export class Solution77 extends AbstractSolution {
             for (let rowIndex = 1; rowIndex < matrix.length; rowIndex ++) {
 
                 for (let colIndex = prevPrime + 1; colIndex <= thisPrime; colIndex++) {
-    
-                    let cellValue = matrix[rowIndex - 1][colIndex];
-    
-                    if (colIndex >= coins[rowIndex - 1]) {
-                        cellValue += matrix[rowIndex][colIndex - coins[rowIndex - 1]];
-                    }
 
-
+                    const cellValue = calcMatrixValue(rowIndex, colIndex);
                     if (cellValue > target) {
                         return colIndex;
                     }
-    
+
                     matrix[rowIndex].push(cellValue);
                 }
             }

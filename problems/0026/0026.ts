@@ -22,24 +22,11 @@ export class Solution26 extends AbstractSolution {
     }
 
     private findRecurring(denom: number): number {
-
-        let seqValues: iSortedList<{
-            seqDigit: number;
-            subResult: number;
-            index: number;
-        }> = new SortedArray(
-            (a, b) => {
-                if (a.seqDigit === b.seqDigit) {
-                    return a.subResult - b.subResult;
-                }
-                return a.subResult - b.subResult
-            }
-        );
+        const seqValues = new Set<string>();
 
         let prevValues = {
             seqDigit: 0,
-            subResult: 1,
-            index: -1
+            subResult: 1
         };
 
         while (true) {
@@ -57,19 +44,19 @@ export class Solution26 extends AbstractSolution {
 
             const newEntry = {
                 seqDigit,
-                subResult,
-                index: prevValues.index + 1
+                subResult
             };
+            const newEntryStr = `${seqDigit},${subResult}`;
             
-            if (seqValues.contains(newEntry)) {
+            if (seqValues.has(newEntryStr)) {
                 break;
             } else {
-                seqValues.add(newEntry);
+                seqValues.add(newEntryStr);
                 prevValues = newEntry;
             }
         }
 
-        return seqValues.length;
+        return seqValues.size;
     }
 
     /***

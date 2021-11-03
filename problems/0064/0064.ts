@@ -1,6 +1,5 @@
 import { SortedArray } from "@byte-this/collections";
 import { BigIntUtils } from "../../utils/bigint-utils";
-import { Fraction } from "../../utils/fraction";
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 
 interface iSeqItem {
