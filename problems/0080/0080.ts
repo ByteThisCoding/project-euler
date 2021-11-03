@@ -41,6 +41,7 @@ export class Solution80 extends AbstractSolution {
 
     private divideSumDigits(floorSqrtN: bigint, frac: BigIntFraction): bigint {
 
+        //if limit was >=100, we would need to sum up digits of floorSqrtN itself and adjust loop
         let digitSum = floorSqrtN;
 
         let workingFrac = frac;
