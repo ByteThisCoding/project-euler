@@ -9,7 +9,7 @@
   "author": "Byte This!",
   "license": "ISC",
   "dependencies": {
-    "@byte-this/collections": "^1.0.12",
+    "@byte-this/collections": "^1.0.14",
     "@byte-this/funscript": "^1.0.20",
     "@types/node": "^16.7.10",
     "bigint-is-perfect-square": "^0.1.0",
