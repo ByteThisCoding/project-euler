@@ -16,9 +16,8 @@ export class Primes extends AbstractSequence<number> {
         return [2, 3, 5, 7, 11, 13]
     }
 
-    protected calculateNthItem(n: number): number {
-        let lastPrimeIndex = n - 1;
-        let lastPrimeValue = this.getNthItem(lastPrimeIndex);
+    protected calculateNthItem(n: number, getPrevPrime: (n: number) => number = this.getPrevPrime.bind(this)): number {
+        let lastPrimeValue = getPrevPrime(n);
 
         const sixMod = lastPrimeValue % 6;
         const nextSixMultiple = lastPrimeValue + 6 - sixMod;
@@ -34,6 +33,44 @@ export class Primes extends AbstractSequence<number> {
         }
         
         return nextPrime;
+    }
+
+    /**
+     * Default implementation to get the (n-1)th prime
+     * @param n 
+     * @returns 
+     */
+    private getPrevPrime(n: number): number {
+        return this.getNthItem(n-1);
+    }
+
+    /**
+     * Iterate over primes WITHOUT storing values
+     * @param callback 
+     */
+    static iterateOverPrimes(callback: (prime: number, stop: Function) => void): void {
+        let keepGoing = true;
+        const stop = () => keepGoing = false;
+
+        let lastPrime = 0;
+        const getLastPrime = () => lastPrime;
+
+        //work with pre-set values first
+        const initial = this.instance.getInitialSequenceItems();
+        for (let i=0; i<initial.length && keepGoing; i++) {
+            callback(initial[i], stop);
+            lastPrime = initial[i];
+        }
+
+        //generate after exhausting initial values
+        for (let n=initial.length+1; keepGoing; n++) {
+            const prime = this.instance.calculateNthItem(
+                n,
+                getLastPrime
+            );
+            callback(prime, stop);
+            lastPrime = prime;
+        }
     }
 
     /**
