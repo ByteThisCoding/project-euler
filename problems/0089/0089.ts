@@ -94,17 +94,15 @@ export class Solution89 extends AbstractSolution {
             .map(key => parseInt(key))
             .sort((a, b) => b - a);
 
-        //create an object which tells us multiples of each numeral
-        const modReductions: {[key: number]: number} = {};
-
         //also reduce to initial string
         let smallest = "";
         for (const key of numKeys) {
-            const multiple = Math.floor(n / key);
-            modReductions[key] = multiple;
-            n = n % key;
+            if (key <= n) {
+                const multiple = Math.floor(n / key);
+                n = n % key;
 
-            smallest += this.numberCharMap[key].repeat(multiple);
+                smallest += this.numberCharMap[key].repeat(multiple);
+            }
         }
         
         return smallest;
