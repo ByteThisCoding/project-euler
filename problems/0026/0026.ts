@@ -1,4 +1,3 @@
-import { iSortedList, SortedArray } from "@byte-this/collections";
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 
 @RunSolution

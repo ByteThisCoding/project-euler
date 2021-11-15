@@ -26,41 +26,49 @@ export class Integer {
     }
 
     private static doGetFactors(n: number, unique: boolean): number[] {
-        const factors: number[] = [1, n];
+        const factorsLeft: number[] = [1];
+        const factorsRight: number[] = [n];
 
         const numLimit: number = Math.sqrt(n);
         for (let i=2; i<=numLimit; i++) {
             if (n % i === 0) {
-                factors.push(i);
+                factorsLeft.push(i);
                 if (!unique || i !== n / i) {
-                    factors.push(n / i);
+                    factorsRight.push(n / i);
                 }
             }
         }
 
-        factors.sort((a, b) => a - b);
+        const factors = factorsLeft;
+        for (let i=factorsRight.length-1; i>-1; i--) {
+            factors.push(factorsRight[i]);
+        }
         return factors;
     }
 
     private static doGetPrimeFactors(n: number, unique: boolean): number[] {
-        const factors: number[] = [1];
+        const factorsLeft: number[] = [1];
+        const factorsRight: number[] = [];
 
         const numLimit: number = Math.sqrt(n);
         for (let i=2; i<=numLimit; i++) {
             if (n % i === 0 && Primes.isPrime(i)) {
-                factors.push(i);
+                factorsLeft.push(i);
             }
 
             if ((!unique || i !== n / i) && Primes.isPrime(n / i)) {
-                factors.push(n / i);
+                factorsRight.push(n / i);
             }
         }
 
         if (Primes.isPrime(n)) {
-            factors.push(n);
+            factorsRight.push(n);
         }
 
-        factors.sort((a, b) => a - b);
+        const factors = factorsLeft;
+        for (let i=factorsRight.length-1; i>-1; i--) {
+            factors.push(factorsRight[i]);
+        }
         return factors;
     }
 
@@ -73,19 +81,23 @@ export class Integer {
     }
 
     private static doGetFactorsBigInt(n: bigint, unique: boolean): bigint[] {
-        const factors: bigint[] = [1n, n];
+        const factorsLeft: bigint[] = [1n];
+        const factorsRight: bigint[] = [n];
 
         const numLimit: bigint = BigIntUtils.sqrt(n);
         for (let i=2n; i<=numLimit; i++) {
             if (n % i === 0n) {
-                factors.push(i);
+                factorsLeft.push(i);
                 if (!unique || i !== n / i) {
-                    factors.push(n / i);
+                    factorsRight.push(n / i);
                 }
             }
         }
 
-        factors.sort((a, b) => Number(a - b));
+        const factors = factorsLeft;
+        for (let i=factorsRight.length-1; i>-1; i--) {
+            factors.push(factorsRight[i]);
+        }
         return factors;
     }
 

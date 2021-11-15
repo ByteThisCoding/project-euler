@@ -14,21 +14,19 @@ export class Solution35 extends AbstractSolution {
     }
 
     private doSolve(limit: number): number {
-        let allCircularPrimes = new SortedArray<number>(
-            SortedArray.compareNumbers
-        );
+        let allCircularPrimes = new Set<number>();
 
         let lastPrime: number = 0;
         for (let i=1; lastPrime < limit; i++) {
             lastPrime = Primes.getNthPrime(i);
-            if (!allCircularPrimes.contains(lastPrime)) {
+            if (!allCircularPrimes.has(lastPrime)) {
                 const circularPrimes = this.determineCircularPrimes(lastPrime);
-                allCircularPrimes.addMany(circularPrimes);
+                circularPrimes.forEach(cp => allCircularPrimes.add(cp));
             }
         }
 
         //console.log(allCircularPrimes.toArray());
-        return allCircularPrimes.length;
+        return allCircularPrimes.size;
     }
 
     //method assumes input is definitely a prime number

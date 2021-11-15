@@ -5,9 +5,11 @@ import { AbstractSolution, RunSolution } from "../../utils/solution";
 @RunSolution
 export class Solution23 extends AbstractSolution {
 
-    private abundantNumbers = new SortedArray(
+    //store in both data structures to save some lookup time
+    private abundantNumbersList = new SortedArray(
         SortedArray.compareNumbers
     );
+    private abundantNumbersSet = new Set<number>();
 
     getProblemName(): string {
         return "Non-Abundant Sums";
@@ -23,7 +25,8 @@ export class Solution23 extends AbstractSolution {
 
             //for future iterations
             if (this.isAbundant(n)) {
-                this.abundantNumbers.add(n);
+                this.abundantNumbersList.add(n);
+                this.abundantNumbersSet.add(n);
             }
         }
 
@@ -31,9 +34,9 @@ export class Solution23 extends AbstractSolution {
     }
 
     private isSumOfTwoAbundantNumbers(n: number): boolean {
-        const subAbundants = this.abundantNumbers.filter(num => num <= n/2);
+        const subAbundants = this.abundantNumbersList.filter(num => num <= n/2);
         for (let subN of subAbundants) {
-            if (this.abundantNumbers.contains(n - subN)) {
+            if (this.abundantNumbersSet.has(n - subN)) {
                 return true;
             }
         }

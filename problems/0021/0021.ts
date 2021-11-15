@@ -42,11 +42,11 @@ export class Solution21 extends AbstractSolution {
     }
 
     private dOfN(n: number): number {
-        return new Integer(n).getUniqueFactors().reduce((acc, int) => {
-            if (int.value === n) {
+        return Integer.getUniqueFactors(n).reduce((acc, int) => {
+            if (int === n) {
                 return acc;
             }
-            return acc + int.value;
+            return acc + int;
         }, 0);
     }
 
