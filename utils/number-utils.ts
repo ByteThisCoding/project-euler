@@ -1,6 +1,5 @@
 export class NumberUtils {
 
-
     public static isPerfectSquare(n: number): boolean {
         const lastDigit = n % 10;
         if ([0, 1, 4, 5, 6, 9].indexOf(lastDigit) === -1) {

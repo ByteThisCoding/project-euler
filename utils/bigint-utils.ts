@@ -4,7 +4,22 @@ const sqrt = require('bigint-isqrt');
 
 export class BigIntUtils {
 
-    public static gcd(...integers: bigint[]): bigint {
+    static log10(n: bigint): bigint {
+        return BigInt(n.toString().length - 1);
+    }
+
+    static getUniqueDigits(n: bigint): Set<bigint> {
+        const digitsSet = new Set<bigint>();
+        while (n > 0) {
+            const digit = n % 10n;
+            digitsSet.add(digit);
+            n /= 10n;
+        }
+
+        return digitsSet;
+    }
+
+    static gcd(...integers: bigint[]): bigint {
         if (integers.length === 1) {
             return integers[0];
         }
@@ -20,11 +35,11 @@ export class BigIntUtils {
         return b ? BigIntUtils.gcdTwoNums(b, a % b) : a;
     }
 
-    public static sqrt(n: bigint): bigint {
+    static sqrt(n: bigint): bigint {
         return sqrt(n);
     }
 
-    public static isPerfectSquare(n: bigint): boolean {
+    static isPerfectSquare(n: bigint): boolean {
         const lastDigit = n % 10n;
         if ([0n, 1n, 4n, 5n, 6n, 9n].indexOf(lastDigit) === -1) {
             return false;
@@ -47,7 +62,7 @@ export class BigIntUtils {
         return n === this.sqrt(n)**2n;
     }
 
-    public static getDigitalRoot(n: bigint): bigint {
+    static getDigitalRoot(n: bigint): bigint {
         let root = n;
         while (root > 9n) {
             root = Array.from(root.toString()).reduce((acc, char) => {
@@ -57,7 +72,7 @@ export class BigIntUtils {
         return root;
     }
 
-    public static abs(n: bigint): bigint {
+    static abs(n: bigint): bigint {
         if (n > 0n) {
             return n;
         }
