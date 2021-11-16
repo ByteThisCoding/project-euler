@@ -1,6 +1,6 @@
 import { AbstractSequence } from "../../utils/sequence";
 
-export class SpiralSequence28 extends AbstractSequence<BigInt> {
+export class SpiralSequence28 extends AbstractSequence<bigint> {
 
     private static instance = new SpiralSequence28();
 
@@ -8,11 +8,11 @@ export class SpiralSequence28 extends AbstractSequence<BigInt> {
         super();
     }
 
-    protected getInitialSequenceItems(): BigInt[] {
+    protected getInitialSequenceItems(): bigint[] {
         return [1n, 3n, 5n, 7n, 9n, 13n, 17n, 21n, 25n];
     }
 
-    protected calculateNthItem(n: number): BigInt {
+    protected calculateNthItem(n: number): bigint {
         /**
          *  * 1, 2,3,4   ,5,    6, 7, 8, 9     ,10,11 ,12, 13
          *  * 1, 3,5,7,   9,    13,17,21, 25,   31, 37, 43, 49
@@ -26,15 +26,15 @@ export class SpiralSequence28 extends AbstractSequence<BigInt> {
         return prevValue+increment;
     }
 
-    static getNthSpiralNumber(n: number): BigInt {
+    static getNthSpiralNumber(n: number): bigint {
         return SpiralSequence28.instance.getNthItem(n);
     }
 
-    static getSpiralSumOfRange(startN: number, endN: number): BigInt {
+    static getSpiralSumOfRange(startN: number, endN: number): bigint {
         return SpiralSequence28.instance.getSumOfRange(startN, endN);
     }
 
-    static getSpiralNumbersInRange(startN: number, endN: number): BigInt[] {
+    static getSpiralNumbersInRange(startN: number, endN: number): bigint[] {
         return SpiralSequence28.instance.getItemsInRange(startN, endN);
     }
     

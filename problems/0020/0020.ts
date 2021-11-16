@@ -7,12 +7,12 @@ export class Solution20 extends AbstractSolution {
         return "Factorial Digit Sum";
     }
     
-    protected solve(): BigInt {
+    protected solve(): bigint {
         return this.doSolve(9876, "string");
         //return this.doSolve(9876, "number");
     }
 
-    private doSolve(limit: number, mode: "string" | "number"): BigInt {
+    private doSolve(limit: number, mode: "string" | "number"): bigint {
 
         let bigProduct = 1n;
 

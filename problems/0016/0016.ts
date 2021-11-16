@@ -7,7 +7,7 @@ export class Solution16 extends AbstractSolution {
         return "Power Digit Sum";
     }
 
-    protected solve(): BigInt {
+    protected solve(): bigint {
         const bigPower = 2n ** 1000n;
         const bigStr = bigPower.toString();
 
