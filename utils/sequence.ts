@@ -1,6 +1,8 @@
 /**
  * Base Class which will let us abstract the logic of generating
- * and maintaining a sequence here
+ * and maintaining a sequence here.
+ * 
+ * Subclasses of particular sequences won't have to worry about doing all of that
  */
 export type IAbstractSequenceType =
     | string

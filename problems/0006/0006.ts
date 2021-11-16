@@ -8,7 +8,6 @@ export class Solution6 extends AbstractSolution {
     }
 
     protected solve(): number {
-        //25164150
         //return this.bruteForceSolve(100);
         return this.smartSolve(100);
     }

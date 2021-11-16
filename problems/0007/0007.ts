@@ -8,12 +8,11 @@ export class Solution7 extends AbstractSolution {
         return "10001st Prime";
     }
 
+    /**
+     * The main logic is implemented in primes.ts
+     */
     protected solve(): number {
-        //104743
         return Primes.getNthPrime(10001);
         //return Primes.getNthPrime(9);
     }
-
-    
-
 }

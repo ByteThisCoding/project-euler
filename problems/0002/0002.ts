@@ -1,7 +1,7 @@
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 
 @RunSolution
-export class Solution0002 extends AbstractSolution {
+export class Solution2 extends AbstractSolution {
     getProblemName(): string {
         return "Even Fibonacci Numbers";
     }

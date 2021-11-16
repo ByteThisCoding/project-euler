@@ -1,7 +1,7 @@
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 
 @RunSolution
-export class Solution0001 extends AbstractSolution {
+export class Solution1 extends AbstractSolution {
     getProblemName(): string {
         return "Multiples of 3 or 5";
     }

@@ -1,6 +1,9 @@
 import { AbstractSequence } from "./sequence";
 const sqrt = require('bigint-isqrt');
 
+/**
+ * This leverages AbstractSequence to handle generating and storing sequence items
+ */
 export class Primes extends AbstractSequence<number> {
 
     private static instance: Primes = new Primes();
@@ -13,9 +16,14 @@ export class Primes extends AbstractSequence<number> {
     }
 
     protected getInitialSequenceItems(): number[] {
+        //first 6 primes
         return [2, 3, 5, 7, 11, 13]
     }
 
+    /**
+     * Calculate the nth prime
+     * This will start with the (n-1)th prime and work its way up
+     */
     protected calculateNthItem(n: number, getPrevPrime: (n: number) => number = this.getPrevPrime.bind(this)): number {
         let lastPrimeValue = getPrevPrime(n);
 
@@ -109,10 +117,6 @@ export class Primes extends AbstractSequence<number> {
     }
 
     static isPrime(number: number): boolean {
-
-        /*if (this.instance.items[this.instance.items.length - 1] >= number) {
-            return this.instance.existsInSequence(number);
-        }*/
 
         if (number === 1) {
             return false;
