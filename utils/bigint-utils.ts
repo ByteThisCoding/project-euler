@@ -1,5 +1,3 @@
-import { BigIntFraction } from "./bigint-fraction";
-
 const sqrt = require('bigint-isqrt');
 
 export class BigIntUtils {

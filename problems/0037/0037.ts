@@ -1,5 +1,3 @@
-import { parse } from "path/posix";
-import { Combinations } from "../../utils/combinations";
 import { Primes } from "../../utils/primes";
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 

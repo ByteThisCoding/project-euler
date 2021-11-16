@@ -1,6 +1,12 @@
 import { BigIntUtils } from "./bigint-utils";
 import { Primes } from "./primes";
 
+/**
+ * This class provides static and non-static methods for working with integers
+ * Can be used as an instance or as a singleton for the same functionalities
+ * 
+ * This includes factoring, getting prime factors, common factors, etc
+ */
 export class Integer {
 
     constructor(
@@ -25,6 +31,11 @@ export class Integer {
         return this.doGetPrimeFactors(n, true);
     }
 
+    /**
+     * @param n 
+     * @param unique : if true, will only include distinct numbers in response
+     * @returns 
+     */
     private static doGetFactors(n: number, unique: boolean): number[] {
         const factorsLeft: number[] = [1];
         const factorsRight: number[] = [n];
