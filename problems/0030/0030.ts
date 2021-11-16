@@ -29,7 +29,14 @@ export class Solution30 extends AbstractSolution {
     }
 
     private getPowerDigitSum(n: number, power: number): number {
-        const digits = Array.from(`${n}`).map(char => parseInt(char));
+        //keep dividing by 10 and mod until we get all digits
+        const digits = [];
+        let dN = n;
+        while (dN > 0) {
+            const digit = dN % 10;
+            digits.push(digit);
+            dN = Math.floor(dN / 10);
+        }
         return digits.reduce((acc, digit) => acc + digit**power, 0);
     }
 

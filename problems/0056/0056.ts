@@ -42,6 +42,7 @@ export class Solution56 extends AbstractSolution {
 
         const powerValue = a**b;
         const powerDigits = Array.from(powerValue.toString());
+        
         return powerDigits.reduce((acc, digitStr) => acc + BigInt(digitStr), 0n);
 
     }

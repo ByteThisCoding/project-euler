@@ -1,3 +1,4 @@
+import { NumberUtils } from "../../utils/number-utils";
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 
 @RunSolution
@@ -41,8 +42,16 @@ export class Solution34 extends AbstractSolution {
     }
 
     private isCuriousNumber(n: number): boolean {
-        const digits = Array.from(`${n}`)
-            .map(digit => parseInt(digit));
+
+        //keep dividing by 10 and mod until we get all digits
+        const digits = [];
+        let dN = n;
+        while (dN > 0) {
+            const digit = dN % 10;
+            digits.push(digit);
+            dN = Math.floor(dN / 10);
+        }
+        
 
         let sum = 0;
         for (let i=0; i<digits.length; i++) {
