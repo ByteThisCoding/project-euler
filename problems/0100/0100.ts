@@ -33,8 +33,8 @@ export class Solution100 extends AbstractSolution {
         const limit = 10 ** 12;
         for (let n = 1; true; n++) {
             const blueCount = this.calcNthA(n);
-            const redCount = this.calcBFromA(blueCount);
-            if (blueCount + redCount > limit) {
+            const totalCount = this.calcBFromA(blueCount);
+            if (totalCount > limit) {
                 return blueCount;
             }
         }
