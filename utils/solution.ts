@@ -26,7 +26,7 @@ export abstract class AbstractSolution {
         } else if (outputType === 'json') {
             console.log(JSON.stringify({
                 executionTimeMs: +endDate - +startDate,
-                solution
+                solution: solution?.toString ? solution.toString() : `${solution}`
             }));
         }
     }
