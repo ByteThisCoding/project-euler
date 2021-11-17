@@ -21,7 +21,7 @@ export class Solution12 extends AbstractSolution {
         for (let n = startTriangleIndex; lastNumFactors < 501; n ++) {
 
             lastTriangleNum = this.getNthTriangleNumber(n);
-            lastNumFactors = new Integer(lastTriangleNum).getUniqueFactors().length;
+            lastNumFactors = Integer.getUniqueFactors(lastTriangleNum).length;
 
         }
 

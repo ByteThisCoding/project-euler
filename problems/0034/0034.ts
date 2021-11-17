@@ -1,4 +1,3 @@
-import { NumberUtils } from "../../utils/number-utils";
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 
 @RunSolution

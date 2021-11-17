@@ -2,6 +2,7 @@ import { AbstractSolution, RunSolution } from "../../utils/solution";
 
 @RunSolution
 export class Solution2 extends AbstractSolution {
+    
     getProblemName(): string {
         return "Even Fibonacci Numbers";
     }

@@ -1,5 +1,9 @@
 import { Fraction } from "./fraction";
 
+/**
+ * Encapsulation of matrix functionality
+ * multiplication, division, etc
+ */
 export class Matrix {
 
     constructor(

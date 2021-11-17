@@ -1,32 +1,34 @@
 import { BigIntUtils } from "./bigint-utils";
 import { Primes } from "./primes";
 
-/**
- * This class provides static and non-static methods for working with integers
- * Can be used as an instance or as a singleton for the same functionalities
- * 
- * This includes factoring, getting prime factors, common factors, etc
+/** 
+ * Util singleton which includes factoring, getting prime factors, common factors, etc
  */
 export class Integer {
-
-    constructor(
-        public readonly value: number
-    ) {}
     
-    static fromString(stringInt: string): Integer {
-        return new Integer(
-            parseInt(stringInt)
-        );
-    }
-
+    /**
+     * Get all factors of a number
+     * @param n 
+     * @returns 
+     */
     static getFactors(n: number): number[] {
         return this.doGetFactors(n, false);
     }
 
+    /**
+     * Get all distinct factors of a number
+     * @param n 
+     * @returns 
+     */
     static getUniqueFactors(n: number): number[] {
         return this.doGetFactors(n, true);
     }
 
+    /**
+     * Get all distinct prime factors of a number
+     * @param n 
+     * @returns 
+     */
     static getUniquePrimeFactors(n: number): number[] {
         return this.doGetPrimeFactors(n, true);
     }
@@ -57,6 +59,12 @@ export class Integer {
         return factors;
     }
 
+    /**
+     * BigInt version
+     * @param n 
+     * @param unique : if true, will only include distinct numbers in response
+     * @returns 
+     */
     private static doGetPrimeFactors(n: number, unique: boolean): number[] {
         const factorsLeft: number[] = [1];
         const factorsRight: number[] = [];
@@ -83,14 +91,30 @@ export class Integer {
         return factors;
     }
 
+    /**
+     * Get the factors for a bigint
+     * @param n 
+     * @returns 
+     */
     static getFactorsBigInt(n: bigint): bigint[] {
         return this.doGetFactorsBigInt(n, false);
     }
 
+    /**
+     * Get the distinct factors for a bigint
+     * @param n 
+     * @returns 
+     */
     static getUniqueFactorsBigInt(n: bigint): bigint[] {
         return this.doGetFactorsBigInt(n, true);
     }
 
+    /**
+     * Helper function to get bigint distinct or non distinct factors
+     * @param n 
+     * @param unique 
+     * @returns 
+     */
     private static doGetFactorsBigInt(n: bigint, unique: boolean): bigint[] {
         const factorsLeft: bigint[] = [1n];
         const factorsRight: bigint[] = [n];
@@ -112,22 +136,11 @@ export class Integer {
         return factors;
     }
 
-    getFactors(): Integer[] {
-        return Integer.doGetFactors(this.value, false).map(val => new Integer(val));
-    }
-
-    getUniqueFactors(): Integer[] {
-        return Integer.doGetFactors(this.value, true).map(val => new Integer(val));
-    }
-
-    getUniquePrimeFactors(): Integer[] {
-        return Integer.doGetPrimeFactors(this.value, true).map(val => new Integer(val));
-    }
-
-    getNumDistinctPrimes(): number {
-        return Integer.getNumDistinctPrimes(this.value);
-    }
-
+    /**
+     * Get the number of distinct prime factors of a number
+     * @param n 
+     * @returns 
+     */
     static getNumDistinctPrimes(n: number): number {
         let numDistinctPrimes = 0;
         let lastPrime = 0;
@@ -142,25 +155,46 @@ export class Integer {
         return numDistinctPrimes;
     }
 
-    getCommonFactors(integer: Integer): Integer[] {
-        const thisFactors = this.getFactors();
-        const thatFactors = integer.getFactors();
+    /**
+     * Get the common factors between two numbers
+     * @param a 
+     * @param b 
+     * @returns 
+     */
+    static getCommonFactors(a: number, b: number): number[] {
+        const thisFactors = this.getUniqueFactors(a);
+        const thatFactors = this.getUniqueFactors(b);
+
+        const thisFactorsSet = new Set(thisFactors);
 
         //TODO: find more efficient way
-        return thisFactors.filter(factor => {
-            return !!thatFactors.find(item => item.value === factor.value);
+        return thatFactors.filter(factor => {
+            return thisFactorsSet.has(factor);
         });
     }
 
-    equals(compareTo: Integer | number): boolean {
-        if (compareTo instanceof Integer) {
-            return this.value === compareTo.value;
-        } else {
-            return this.value === compareTo;
+    /**
+     * Check if the square root of a number is an integer
+     * @param n 
+     * @returns 
+     */
+    static isPerfectSquare(n: number): boolean {
+        const lastDigit = n % 10;
+        if ([0, 1, 4, 5, 6, 9].indexOf(lastDigit) === -1) {
+            return false;
         }
+        
+        return Number.isInteger(Math.sqrt(n));
     }
 
-    toString(): string {
-        return `${this.value}`;
+    static getDigitalRoot(n: number): number {
+        let root = n;
+        while (root > 9) {
+            root = Array.from(root.toString()).reduce((acc, char) => {
+                return acc + parseInt(char);
+            }, 0);
+        }
+        return root;
     }
+
 }

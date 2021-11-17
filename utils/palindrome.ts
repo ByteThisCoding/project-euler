@@ -1,5 +1,10 @@
 export class Palindrome {
 
+    /**
+     * Determine if a string | number is a palindrome
+     * @param input 
+     * @returns 
+     */
     public static isPalindrome(input: string | number): boolean {
         if (typeof input === 'number') {
             input = `${input}`;

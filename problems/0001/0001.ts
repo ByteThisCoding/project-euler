@@ -2,17 +2,23 @@ import { AbstractSolution, RunSolution } from "../../utils/solution";
 
 @RunSolution
 export class Solution1 extends AbstractSolution {
+
     getProblemName(): string {
         return "Multiples of 3 or 5";
     }
 
     protected solve() {
         //return this.bruteForceSolve(9876543);
-        //solution: 233168
         //return this.smartSolve(9876543);
         return this.smarterSolve(9876543);
     }
 
+    /**
+     * This calculates the answer better than the other two methods below
+     * Instead of looping, we just perform a few calculations
+     * @param limit 
+     * @returns 
+     */
     private smarterSolve(limit: number): number {
         const sum3 = 3*this.sumFromOneToN(limit/3);
         const sum5 = 5*this.sumFromOneToN(limit/5);
@@ -26,6 +32,11 @@ export class Solution1 extends AbstractSolution {
         return (n*(n+1))/2;
     }
 
+    /**
+     * This is better than the brute force, but there's still a faster way
+     * @param limit 
+     * @returns 
+     */
     private smartSolve(limit: number): number {
         let sum: number = 0;
         for (let i=3; i<limit; i+=3) {
@@ -41,6 +52,12 @@ export class Solution1 extends AbstractSolution {
         return sum;
     }
 
+    /**
+     * This is an initial attempt at solving the problem
+     * It gets the correct answer, but it isn't the most efficient way
+     * @param limit 
+     * @returns 
+     */
     private bruteForceSolve(limit: number): number {
         let sum: number = 0;
         for (let i=1; i<limit; i++) {

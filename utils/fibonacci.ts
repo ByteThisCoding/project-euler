@@ -1,5 +1,9 @@
 import { AbstractSequence } from "./sequence";
 
+/**
+ * Encapsulation of the Fibonacci sequence
+ * This leverages AbstractSolution, which handles the sequence maintenance
+ */
 export class Fibonacci extends AbstractSequence<bigint> {
 
     private static instance = new Fibonacci();

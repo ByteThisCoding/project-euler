@@ -12,8 +12,16 @@ export abstract class AbstractSolution {
     async run(outputType: 'console' | 'json'): Promise<void> {
         const startDate = new Date();
 
+        let nodeConsole = console;
+
         if (outputType === 'console') {
             console.log(`Running solution for ${this.getProblemName()}`);
+        } else if (outputType === 'json') {
+            console = {
+                log: () => {},
+                warn: () => {},
+                error: () => {}
+            } as any;
         }
 
         const solution = await this.solve();
@@ -24,7 +32,7 @@ export abstract class AbstractSolution {
             console.log("SOLUTION: ", solution);
             console.log(`Solution took ${+endDate - +startDate}ms`);
         } else if (outputType === 'json') {
-            console.log(JSON.stringify({
+            nodeConsole.log(JSON.stringify({
                 executionTimeMs: +endDate - +startDate,
                 solution: solution?.toString ? solution.toString() : `${solution}`
             }));

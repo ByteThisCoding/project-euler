@@ -10,7 +10,7 @@ export class Solution5 extends AbstractSolution {
     }
 
     protected solve() {
-        return this.doSolve(20); //232792560
+        return this.doSolve(20);
     }
 
     private doSolve(maxNum: number): number {
@@ -19,15 +19,14 @@ export class Solution5 extends AbstractSolution {
         for (let i=maxNum; i>=2; i--) {
             const mod = workingValue % i;
             if (mod !== 0) {
-                const commonFactors = 
-                    new Integer(i).getCommonFactors(new Integer(mod));
+                const commonFactors = Integer.getCommonFactors(i, mod);
 
                 let reducedI = i;
                 let reducedMod = mod;
 
                 commonFactors.forEach(factor => {
-                    reducedI /= factor.value;
-                    reducedMod /= factor.value;
+                    reducedI /= factor;
+                    reducedMod /= factor;
                 });
 
                 workingValue *= reducedI;
@@ -37,8 +36,8 @@ export class Solution5 extends AbstractSolution {
     }
 
     private multiplyAcross(maxNum: number): number {
-        let product: number = 1;
-        for (let i=2; i<=maxNum; i++) {
+        let product: number = 2;
+        for (let i=3; i<=maxNum; i+=2) {
             if (Primes.isPrime(i)) {
                 product *= i;
             }

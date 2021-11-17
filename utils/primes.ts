@@ -89,18 +89,41 @@ export class Primes extends AbstractSequence<number> {
         return this.instance.getNthItem(n);
     }
 
+    /**
+     * Given a prime, figure out it's index number (1 based)
+     * @param prime 
+     * @returns 
+     */
     static getNthPrimeIndex(prime: number): number {
         return this.instance.getIndexOfItem(prime);
     }
 
+    /**
+     * Get all primes within the provided number range
+     * @param startIndex 
+     * @param endIndex 
+     * @returns 
+     */
     static getPrimesInRange(startIndex: number, endIndex: number): number[] {
         return this.instance.getItemsInRange(startIndex, endIndex);
     }
 
+    /**
+     * Get the sum of primes within the provided range
+     * @param startIndex 
+     * @param endIndex 
+     * @returns 
+     */
     static getSumOfPrimesInRange(startIndex: number, endIndex: number): number {
         return this.instance.getSumOfRange(startIndex, endIndex);
     }
 
+    /**
+     * Get all primes which appear between startvalue and endvalue
+     * @param startValue 
+     * @param endValue 
+     * @returns 
+     */
     static getPrimesInValueRange(startValue: number, endValue: number): number[] {
         return this.instance.getItemsInValueRange(startValue, endValue);
     }

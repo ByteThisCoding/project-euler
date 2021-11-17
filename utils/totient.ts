@@ -1,6 +1,9 @@
 import { Fraction } from "./fraction";
 import { Primes } from "./primes";
 
+/**
+ * Singleton to provide functions for calculating a totient value
+ */
 export class Totient {
 
     public static getTotientOfN(n: number): number {
@@ -32,6 +35,11 @@ export class Totient {
         return product.getNumerator();
     }
 
+    /**
+     * Use a dynamic programming approach to get totient values up to and including a certain number
+     * @param endNum 
+     * @returns 
+     */
     public static getTotientsUpTo(endNum: number): number[] {
         endNum += 1;
 
