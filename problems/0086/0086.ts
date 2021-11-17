@@ -22,7 +22,7 @@ export class Solution86 extends AbstractSolution {
     private doSolve(limit: number): number {
 
         //keep track of count per dimension
-        let dimMap = new Map<number, number>();
+        const dimMap = new Map<number, number>();
 
         let isSearching = true;
         //generate triplets

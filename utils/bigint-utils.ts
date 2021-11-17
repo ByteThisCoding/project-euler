@@ -1,11 +1,24 @@
 const sqrt = require('bigint-isqrt');
 
+/**
+ * Provides some of the functionality which exists in Math.* for numbers but not for bigints
+ */
 export class BigIntUtils {
 
+    /**
+     * Get the log10, rounded down
+     * @param n 
+     * @returns 
+     */
     static log10(n: bigint): bigint {
         return BigInt(n.toString().length - 1);
     }
 
+    /**
+     * Get the unique digits within a number
+     * @param n 
+     * @returns 
+     */
     static getUniqueDigits(n: bigint): Set<bigint> {
         const digitsSet = new Set<bigint>();
         while (n > 0) {

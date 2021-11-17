@@ -1,5 +1,14 @@
+/**
+ * Singleton which exposes functionality for permutations and combinations
+ */
 export class Combinations {
 
+    /**
+     * Choose n from r
+     * @param n 
+     * @param r 
+     * @returns 
+     */
     public static chooseNFromRCount(n: bigint, r: bigint): bigint {
         const nMinusR = n - r;
         const small = nMinusR < n ? nMinusR : n;
@@ -7,6 +16,14 @@ export class Combinations {
         return this.factorialOf(n, big) / this.factorialOf(small);
     }
 
+    /**
+     * Get the factorial of n
+     * Also allows for dividing by another factorial
+     * This uses bigints by default
+     * @param n 
+     * @param div 
+     * @returns 
+     */
     public static factorialOf(n: bigint, div: bigint = 1n): bigint {
         let product = 1n;
         for (let m=div+1n; m<=n; m++) {

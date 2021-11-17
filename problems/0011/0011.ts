@@ -31,8 +31,6 @@ export class Solution11 extends AbstractSolution {
     });
 
     getProblemName(): string {
-        //70600674
-        //1788696
         return "Largest Product in a Grid";
     }
 

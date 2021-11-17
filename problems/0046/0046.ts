@@ -1,3 +1,4 @@
+import { Integer } from "../../utils/integer";
 import { Primes } from "../../utils/primes";
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 
@@ -10,7 +11,7 @@ export class Solution46 extends AbstractSolution {
 
     protected solve() {
         return this.doSolve();
-        //return this.isConjectureTrueFor(33);
+        //return this.isConjectureTrueFor(17);
     }
 
     private doSolve(): number {
@@ -26,10 +27,9 @@ export class Solution46 extends AbstractSolution {
         if (n < 4) {
             return false;
         }
-        const sqrt = Math.sqrt(n);
 
         let lastPrime = 0;
-        for (let primeIndex = 1; lastPrime <= sqrt; primeIndex++) {
+        for (let primeIndex = 1; lastPrime < n; primeIndex++) {
             lastPrime = Primes.getNthPrime(primeIndex);
 
             if (this.isDoublePerfectSquare(n - lastPrime)) {
@@ -46,7 +46,7 @@ export class Solution46 extends AbstractSolution {
     }
 
     private isDoublePerfectSquare(n: number): boolean {
-        return Number.isInteger(Math.sqrt(n/2));
+        return Integer.isPerfectSquare(n/2);
     }
 
 }
