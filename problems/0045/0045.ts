@@ -11,20 +11,18 @@ export class Solution45 extends AbstractSolution {
         return this.doSolve();
     }
 
+    /**
+     * Iterate over hex numbers
+     * If one is also triangular and pentagonal, return it
+     */
     private doSolve(): number {
         for (let hexIndex=144; true; hexIndex++) {
             const hex = this.getNthHexagonal(hexIndex);
             if (this.isTrianglar(hex) && this.isPentagonal(hex)) {
-                //return this.getNthTriangularInverse(hex);
                 return hex;
             }
         }
     }
-
-    /*private getNthTriangularInverse(n: number): number {
-        const sqrt = Math.sqrt(1+8*n);
-        return (sqrt-1)/2;
-    }*/
 
     private isTrianglar(n: number): boolean {
         const sqrt = Math.sqrt(1+8*n);
@@ -35,11 +33,6 @@ export class Solution45 extends AbstractSolution {
         const squareRoot = Math.sqrt(1+24*n);
         return squareRoot % 6 === 5;
     }
-
-    /*private isHexagonal(n: number): boolean {
-        const squareRoot = Math.sqrt(1+8*n);
-        return squareRoot % 4 === 3;
-    }*/
 
     private getNthHexagonal(n: number): number {
         return n*(2*n-1);

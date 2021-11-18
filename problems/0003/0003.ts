@@ -12,6 +12,16 @@ export class Solution3 extends AbstractSolution {
         return this.getLargestPrimeFactor(600851475143);
     }
 
+    /**
+     * Loop through numbers up to the sqrt limit
+     * If it is a factor of the int and is prime, save it
+     * 
+     * Note: this can be done more efficiently by iterating over primes directly
+     * More efficient implementations are used in later Project Euler problems
+     * @param int 
+     * @returns 
+     */
+
     private getLargestPrimeFactor(int: number): number {
        
         let largestPrime: number = 1;

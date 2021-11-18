@@ -8,12 +8,14 @@ export class Solution44 extends AbstractSolution {
     }
 
     protected solve() {
-        /*for (let i=1; i<36; i++) {
-            console.log(i, this.isPentagonal(i));
-        }*/
         return this.doSolve();
     }
 
+    /**
+     * Iterate over different values of k and j (pairs)
+     * Find pairs which both add and subtract to pentagonal numbers
+     * @returns 
+     */
     private doSolve(): number {
         for (let kIndex = 2; true; kIndex++) {
             const kValue = this.pOfN(kIndex);
@@ -31,6 +33,11 @@ export class Solution44 extends AbstractSolution {
         }
     }
 
+    /**
+     * p(n) as described by the problem
+     * @param n 
+     * @returns 
+     */
     private pOfN(n: number): number {
         return n*(3*n-1)/2;
     }

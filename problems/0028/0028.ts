@@ -8,6 +8,10 @@ export class Solution28 extends AbstractSolution {
         return "Number Spiral Diagonals";
     }
 
+    /**
+     * The main functionality is implemented in "spiral-sequence.ts"
+     * @returns 
+     */
     protected solve(): any {
         const lastIndex = this.getEndIndex(1001);
         return SpiralSequence28.getSpiralSumOfRange(1, lastIndex);

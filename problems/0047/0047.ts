@@ -1,5 +1,4 @@
 import { Integer } from "../../utils/integer";
-import { Primes } from "../../utils/primes";
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 
 @RunSolution

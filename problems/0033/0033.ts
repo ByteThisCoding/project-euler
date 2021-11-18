@@ -58,11 +58,6 @@ export class Solution33 extends AbstractSolution {
 
                             if (fractionLeft.equalTo(abFrac) || fractionRight.equalTo(abFrac)) {
                                 fractionProduct = fractionProduct.multiplyFraction(abFrac);
-                                /*console.log({
-                                    ab: abFrac.toString(),
-                                    left: fractionLeft.toString(),
-                                    right: fractionRight.toString()
-                                });*/
                             }
                         }
 

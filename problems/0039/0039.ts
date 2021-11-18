@@ -9,13 +9,12 @@ export class Solution39 extends AbstractSolution {
 
     protected solve() {
         return this.doSolve();
-        //return this.findNumberIntegerRightTriangles(120);
     }
 
     private doSolve(): number {
         let maxCount = 0;
         let maxP = 0;
-        for (let i=1; i<=1000; i++) {
+        for (let i=1; i<=1_000; i++) {
             const numRight = this.findNumberIntegerRightTriangles(i);
             if (numRight > maxCount) {
                 maxP = i;
@@ -25,6 +24,13 @@ export class Solution39 extends AbstractSolution {
         return maxP;
     }
 
+    /**
+     * Iterate over different a and b combinations to find integer right triangles
+     * There are more efficient ways of doing this (generating pythagorean triples)
+     *      Those methods are used in later project euler problems
+     * @param p 
+     * @returns 
+     */
     private findNumberIntegerRightTriangles(p: number): number {
         const maxAB = 2*Math.ceil(p/3);
 

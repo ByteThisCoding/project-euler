@@ -1,9 +1,9 @@
-import { Combinations } from "../../utils/combinations";
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 
 @RunSolution
 export class Solution43 extends AbstractSolution  {
 
+    //divisibility map, based on the list given in the problem
     private divisibilityMap = [
         -1,
         2,

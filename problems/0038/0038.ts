@@ -24,6 +24,11 @@ export class Solution38 extends AbstractSolution {
         //return this.getPandigitalNumber(9);
     }
 
+    /**
+     * Iterate over 2 <= x < 10_000
+     * For each, get pandigital number and return largest
+     * @returns 
+     */
     private doSolve(): number {
         let largestPan = 123456789;
         for (let x=2; x<10_000; x++) {

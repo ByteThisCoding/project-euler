@@ -13,6 +13,10 @@ export class Solution50 extends AbstractSolution {
         return this.fanOutSolve(1_000_000);
     }
 
+    /**
+     * Find the sequence by fanning out from different start & end positions
+     * We can tighten our bounds when the solution moves farther away
+     */
     private fanOutSolve(limit: number): number {
         let numConsecutiveMax = 0;
         let maxNumConsecutivePrime = 0;
@@ -42,17 +46,12 @@ export class Solution50 extends AbstractSolution {
         return maxNumConsecutivePrime;
     }
 
-    private getSumOfPrimesInRangeOrLimit(lowerPrimeIndex: number, higherPrimeIndex: number, limit: number): number {
-        let sum = 0;
-        for (let i = lowerPrimeIndex; i <= higherPrimeIndex; i++) {
-            sum += Primes.getNthPrime(lowerPrimeIndex);
-            if (sum >= limit) {
-                return -1;
-            }
-        }
-        return sum;
-    }
-
+    /**
+     * This is a much slower version of the solution
+     * We've left this here for reference
+     * @param limit 
+     * @returns 
+     */
     private bruteForceSolve(limit: number): number {
         let numConsecutiveMax = 0;
         let maxNumConsecutivePrime = 0;
@@ -77,6 +76,17 @@ export class Solution50 extends AbstractSolution {
         }
 
         return maxNumConsecutivePrime;
+    }
+
+    private getSumOfPrimesInRangeOrLimit(lowerPrimeIndex: number, higherPrimeIndex: number, limit: number): number {
+        let sum = 0;
+        for (let i = lowerPrimeIndex; i <= higherPrimeIndex; i++) {
+            sum += Primes.getNthPrime(lowerPrimeIndex);
+            if (sum >= limit) {
+                return -1;
+            }
+        }
+        return sum;
     }
 
     /***

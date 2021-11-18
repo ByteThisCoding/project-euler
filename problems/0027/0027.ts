@@ -12,6 +12,13 @@ export class Solution27 extends  AbstractSolution {
         return this.doSolve();   
     }
 
+    /**
+     * Iterate over different values of a and b to find the max values
+     * We can skip certain values:
+     * : a - skip even numbers
+     * : b - use primes only
+     * @returns 
+     */
     private doSolve(): number {
 
         /****
@@ -29,15 +36,15 @@ export class Solution27 extends  AbstractSolution {
 
             let lastPrimeValue = 0;
             let lastPrimeIndex = 1;
+
             for (lastPrimeIndex = 1; lastPrimeValue < 1000; lastPrimeIndex += 1) {
                 const b = Primes.getNthPrime(lastPrimeIndex);
                 lastPrimeValue = b;
 
-                const quad = this.createQuadratic(a, b);
                 let thisSequenceLength = 0;
                 let isStillPrime = true;
                 for (let n=0; isStillPrime; n++) {
-                    const quadResult = quad(n);
+                    const quadResult = this.calcVariableQuad(n, a, b);
                     if (Primes.isPrime(quadResult)) {
                         thisSequenceLength++;
                     } else {
@@ -52,15 +59,13 @@ export class Solution27 extends  AbstractSolution {
             }
         }
 
-        console.log({maxA, maxB, maxSeqLength})
         return maxA*maxB;
 
     }
 
-    private createQuadratic(a: number, b: number): (n: number) => number {
-        return (n: number) => {
-            return n*n + a*n + b;
-        }
+    //calculate the quadratic value for different values of n, a, and b
+    private calcVariableQuad(n: number, a: number, b: number): number {
+        return n**2 + a*n + b;
     }
 
 }

@@ -1,4 +1,3 @@
-import { Equals } from "@byte-this/funscript";
 import { Combinations } from "../../utils/combinations";
 import { Primes } from "../../utils/primes";
 import { AbstractSolution, RunSolution } from "../../utils/solution";
@@ -11,13 +10,15 @@ export class Solution49 extends AbstractSolution {
     }
 
     solve() {
-        //return Primes.getNthPrimeIndex(17);
         return this.doSolve();
     }
 
+    /**
+     * Generate primes and try to get sequences from them
+     */
     protected doSolve(): string {
         let lastPrime = 0;
-        for (let primeIndex = 1; lastPrime < 10000; primeIndex++) {
+        for (let primeIndex = 1; lastPrime < 10_000; primeIndex++) {
             lastPrime = Primes.getNthPrime(primeIndex);
             if (lastPrime > 1000) {
                 const seq = this.getSequenceFromPrime(lastPrime);
@@ -26,6 +27,7 @@ export class Solution49 extends AbstractSolution {
                 }
             }
         }
+        //this won't happen
         return "No prime found!";
     }
 

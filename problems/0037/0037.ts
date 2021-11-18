@@ -4,9 +4,8 @@ import { AbstractSolution, RunSolution } from "../../utils/solution";
 @RunSolution
 export class Solution37 extends AbstractSolution {
 
-    //caching is commented out as it only had marginal impact on performance
-
-    //private primeCache = new Map<string, boolean>();
+    //some caching is commented out as it only had marginal impact on performance
+    private primeCache = new Map<string, boolean>();
     //private leftTruncateCache = new Map<string, boolean>();
     //private rightTruncateCache = new Map<string, boolean>();
 
@@ -33,6 +32,12 @@ export class Solution37 extends AbstractSolution {
         return primesSum;
     }
 
+    /**
+     * Generate possible truncatable prime candidates
+     * Rule out some choices, such as numbers that don't end with 3 or 7
+     * @param numMiddleDigits 
+     * @returns 
+     */
     private makeTruncatablePrimes(numMiddleDigits: number): string[] {
 
         const leftPrimes = [2,3,5,7];
@@ -60,7 +65,6 @@ export class Solution37 extends AbstractSolution {
                 innerChoices.forEach(choice => {
                     const itemStr = `${leftPrimes[iLeft]}${choice}${rightPrimes[iRight]}`;
                     if (this.isTruncatablePrime(itemStr)) {
-                        console.log("======>", itemStr);
                         combos.push(itemStr);
                     }
                 })
@@ -72,51 +76,55 @@ export class Solution37 extends AbstractSolution {
     }
 
     private isTruncatablePrime(n: string): boolean {
-
         return this.isPrimeLeftTruncatable(n) && this.isPrimeRightTruncatable(n);
     }
 
+    /**
+     * Check if we can remove from the left and preserve property
+     * @param n 
+     * @returns 
+     */
     private isPrimeLeftTruncatable(n: string): boolean {
         let isTruncatablePrime = true;
 
         //remove from left
         for (let i=0; isTruncatablePrime && i<n.length; i++) {
             const subNstr = n.substring(i);
-            /*if (this.leftTruncateCache.has(subNstr)) {
-                isTruncatablePrime = this.leftTruncateCache.get(subNstr)!;
-            } else {*/
-                isTruncatablePrime = this.determineSingleCase(subNstr);
-                /*this.leftTruncateCache.set(subNstr, isTruncatablePrime);
-            }*/
+            isTruncatablePrime = this.isPrime(subNstr);
         }
 
         return isTruncatablePrime;
     }
 
+    /**
+     * Check if we can remove from the right and preserve property
+     * @param n 
+     * @returns 
+     */
     private isPrimeRightTruncatable(n: string): boolean {
         let isTruncatablePrime = true;
 
         for (let i=n.length; isTruncatablePrime && i>0; i--) {
             const subNstr = n.substring(0, i);
-            /*if (this.rightTruncateCache.has(subNstr)) {
-                isTruncatablePrime = this.rightTruncateCache.get(subNstr)!;
-            } else {*/
-                isTruncatablePrime = this.determineSingleCase(subNstr);
-                /*this.rightTruncateCache.set(subNstr, isTruncatablePrime);
-            }*/
+            isTruncatablePrime = this.isPrime(subNstr);
         }
 
         return isTruncatablePrime;
     }
 
-    private determineSingleCase(subNstr: string): boolean {
-        /*if (this.primeCache.has(subNstr)) {
+
+    /**
+     * Check if it is prime and use caching for duplicate checks
+     * @param subNstr 
+     * @returns 
+     */
+    private isPrime(subNstr: string): boolean {
+        if (this.primeCache.has(subNstr)) {
             return this.primeCache.get(subNstr)!;
         }
-        const isPrime = Primes.isPrime(BigInt(subNstr));
+        const isPrime = Primes.isPrimeBigInt(BigInt(subNstr));
         this.primeCache.set(subNstr, isPrime);
-        return isPrime;*/
-        return Primes.isPrimeBigInt(BigInt(subNstr));
+        return isPrime;
     }
 
 }

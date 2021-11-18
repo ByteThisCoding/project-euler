@@ -7,6 +7,9 @@ export class Solution26 extends AbstractSolution {
         return "Reciprocal Cycles";
     }
 
+    /**
+     * Loop over integers, get recurring lengths, return the largest one
+     */
     protected solve(): any {
         let longestRecurN = 0;
         let longestRecurCount = 0;

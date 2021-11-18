@@ -17,10 +17,16 @@ export class Solution32 extends AbstractSolution {
         //const firstCasePandigitals = this.enumerateDigits(choices);
         const secondCasePandigitals = this.findSecondCasePandigital(choices);
 
-        return [/*...firstCasePandigitals, */...secondCasePandigitals].reduce((acc, digitStr) => {
-            return acc + parseInt(digitStr);
+        return [/*...firstCasePandigitals, */...secondCasePandigitals].reduce((acc, pan) => {
+            return acc + pan;
         }, 0);
     }
+
+    /**
+     * This was eventually not needed but is left for reference
+     * @param choices 
+     * @returns 
+     */
 
     private enumerateDigits(choices: number[]): string[] {
         if (choices.length === 1) {
@@ -39,10 +45,15 @@ export class Solution32 extends AbstractSolution {
         return enumeration;
     }
 
-    private findSecondCasePandigital(choices: number[]): string[] {
+    /**
+     * Generate permutations, then iterate over it to find matches
+     * @param choices 
+     * @returns 
+     */
+
+    private findSecondCasePandigital(choices: number[]): number[] {
         //length of a + length of b + length of answer === choices.length
-        //let pandigitals: string[] = [];
-        let pandigitals = new Set<string>();
+        const pandigitals = new Set<number>();
 
         //first, iterate over length of a
         for (let aCount = 1; aCount <= choices.length - 2; aCount++) {
@@ -88,7 +99,7 @@ export class Solution32 extends AbstractSolution {
                                 }
                             }
                             if (isEqual) {
-                                pandigitals.add(`${abProduct}`);
+                                pandigitals.add(abProduct);
                             }
                         }
                     }

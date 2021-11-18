@@ -11,9 +11,12 @@ export class Solution46 extends AbstractSolution {
 
     protected solve() {
         return this.doSolve();
-        //return this.isConjectureTrueFor(17);
     }
 
+    /**
+     * Increment by 2 until we find a false case
+     * @returns 
+     */
     private doSolve(): number {
 
         for (let i = 9; true; i+=2) {
@@ -45,6 +48,10 @@ export class Solution46 extends AbstractSolution {
         return false;
     }
 
+    /**
+     * Implementation is in 'integer.ts'
+     * Uses optimizations to check if a number is a perfect square
+     */
     private isDoublePerfectSquare(n: number): boolean {
         return Integer.isPerfectSquare(n/2);
     }

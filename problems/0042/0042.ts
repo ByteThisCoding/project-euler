@@ -12,6 +12,11 @@ export class Solution42 extends AbstractSolution {
         return this.doSolve();
     }
 
+    /**
+     * Read the file, for each word:
+     * 1. Calculate the word value
+     * 2. If triangle number, add count
+     */
     private async doSolve() {
         let numTriangleWords = 0;
         await this.readFile(__dirname+"/words.txt", (word: string) => {
@@ -39,11 +44,19 @@ export class Solution42 extends AbstractSolution {
     }
 
     private calcWordValue(word: string): number {
-        return Array.from(word).reduce((acc, char) => {
-            return acc + char.toUpperCase().charCodeAt(0) - 64;
-        }, 0);
+        let acc = 0;
+        for (let i=0; i<word.length; i++) {
+            acc += word.charCodeAt(i) - 64;
+        }
+        return acc;
     }
 
+    /**
+     * Read the file one char at a time
+     * @param fileName 
+     * @param wordFoundCallback 
+     * @returns 
+     */
     private async readFile(fileName: string, wordFoundCallback: (word: string) => any): Promise<void> {
         return new Promise(resolve => {
             const readable = fs.createReadStream(fileName, {

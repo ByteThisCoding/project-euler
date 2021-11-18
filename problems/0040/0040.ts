@@ -20,12 +20,18 @@ export class Solution40 extends AbstractSolution {
         return digits.reduce((acc, digit) => acc*digit, 1);
     }
 
+    /**
+     * Iterate over the Champernowne constant
+     * Assumes indices are sorted in non-decreasing order
+     * @param indices 
+     * @returns 
+     */
     private getChampIndices(indices: number[]): number[] {
-        indices.sort((a, b) => a-b);
 
         let findingIndex = indices[0];
         let currentIndex = 0;
         let digitAtIndices: number[] = [];
+
         for (let i=1; digitAtIndices.length < indices.length; i++) {
             
             const numStr = `${i}`;

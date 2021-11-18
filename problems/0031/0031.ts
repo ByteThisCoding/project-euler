@@ -8,10 +8,16 @@ export class Solution31 extends AbstractSolution {
     }
 
     protected solve() {
-        //return this.getNumChoices(4, [1, 2, 5]);
         return this.getNumChoices(200, [1, 2, 5, 10, 20, 50, 100, 200]);
     }
 
+    /**
+     * We'll use the classic coin sums dynamic algorithm for this
+     * Build up a matrix of subproblems which will help with the main one
+     * @param limit 
+     * @param choices 
+     * @returns 
+     */
     private getNumChoices(limit: number, choices: number[]): number {
         const subProblemMatrix: number[][] = [];
 
@@ -39,8 +45,6 @@ export class Solution31 extends AbstractSolution {
                 subProblemMatrix[choiceIndex][limitIt] = prevCoinChoices + nowChoicePlus;
             }
         }
-
-        //console.log(subProblemMatrix);
 
         const subProblemLastRow = subProblemMatrix[subProblemMatrix.length - 1];
         return subProblemLastRow[subProblemLastRow.length - 1];

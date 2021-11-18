@@ -12,6 +12,11 @@ export class Solution36 extends AbstractSolution {
         return this.doSolve(1_000_000);
     }
 
+    /**
+     * For each n < limit, check if base 10 and 2 are both palindromes
+     * @param limit 
+     * @returns 
+     */
     private doSolve(limit: number): number {
         let sum = 0;
         for (let i=1; i<limit; i++) {

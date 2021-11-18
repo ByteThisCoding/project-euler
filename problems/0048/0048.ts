@@ -11,6 +11,9 @@ export class Solution48 extends AbstractSolution {
         return this.doSolve(1000n);
     }
 
+    /**
+     * Perform the sum of self powers up to the limit
+     */
     private doSolve(limit: bigint): string {
         let sum = 0n; //bigint
         for (let i=1n; i<=limit; i++) {

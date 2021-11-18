@@ -17,6 +17,14 @@ export class Solution30 extends AbstractSolution {
         return this.doSolve(5);
     }
 
+
+    /**
+     * We can provide a power value
+     * Useful for testing against 4 with the example,
+     *      then setting to 5 to solve
+     * @param power 
+     * @returns 
+     */
     private doSolve(power: number): number {
 
         let sum = 0;
@@ -42,7 +50,6 @@ export class Solution30 extends AbstractSolution {
             n = Math.floor(n / 10);
             total += this.getPower(digit, power);
         }
-        //return digits.reduce((acc, digit) => acc + digit**power, 0);
         return total;
     }
 

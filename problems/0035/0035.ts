@@ -13,23 +13,35 @@ export class Solution35 extends AbstractSolution {
         return this.doSolve(1_000_000);
     }
 
+    /**
+     * Iterate over primes until we're past the limit
+     * @param limit 
+     * @returns 
+     */
     private doSolve(limit: number): number {
+        //use a set to automatically filter duplicates
         let allCircularPrimes = new Set<number>();
 
-        let lastPrime: number = 0;
-        for (let i=1; lastPrime < limit; i++) {
-            lastPrime = Primes.getNthPrime(i);
-            if (!allCircularPrimes.has(lastPrime)) {
-                const circularPrimes = this.determineCircularPrimes(lastPrime);
-                circularPrimes.forEach(cp => allCircularPrimes.add(cp));
+        Primes.iterateOverPrimes((prime, stop) => {
+            if (prime > limit) {
+                stop();
+            } else {
+                if (!allCircularPrimes.has(prime)) {
+                    const circularPrimes = this.determineCircularPrimes(prime);
+                    circularPrimes.forEach(cp => allCircularPrimes.add(cp));
+                }
             }
-        }
+        })
 
-        //console.log(allCircularPrimes.toArray());
         return allCircularPrimes.size;
     }
 
-    //method assumes input is definitely a prime number
+    /**
+     * Method assumes input is definitely a prime number
+     * Check if all rotations of the number are also prime
+     * @param n 
+     * @returns 
+     */
     private determineCircularPrimes(n: number): number[] {
         const primesSet = new Set<number>();
         primesSet.add(n);

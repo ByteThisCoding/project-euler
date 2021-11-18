@@ -1,5 +1,8 @@
 import { AbstractSequence } from "../../utils/sequence";
 
+/**
+ * This extends a class which handles maintaining the sequence values
+ */
 export class SpiralSequence28 extends AbstractSequence<bigint> {
 
     private static instance = new SpiralSequence28();
@@ -20,9 +23,8 @@ export class SpiralSequence28 extends AbstractSequence<bigint> {
          */
 
         const prevValue = this.getNthItem(n-1);
-        const increment = BigInt(2*Math.ceil((n-1)/4));
+        const increment = 2n*BigInt(Math.ceil((n-1)/4));
 
-        //@ts-ignore
         return prevValue+increment;
     }
 

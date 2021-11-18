@@ -21,10 +21,10 @@ export class Solution34 extends AbstractSolution {
     }
 
     protected solve() {
-        return this.doSolve();
+        return this.bruteForceSolve();
     }
 
-    private doSolve(): number {
+    private bruteForceSolve(): number {
         /**
          * 
          * Since 9!*8 < 10^8, we will stop searching once we reach 10 million
@@ -40,6 +40,19 @@ export class Solution34 extends AbstractSolution {
         return sum;
     }
 
+    private factorialOf(n: number): number {
+        let fac = 2;
+        for (let i=3; i<=n; i++) {
+            fac *= i;
+        }
+        return fac;
+    }
+
+    /**
+     * Check if this is a "curious number" as per problem description
+     * @param n 
+     * @returns 
+     */
     private isCuriousNumber(n: number): boolean {
 
         //keep dividing by 10 and mod until we get all digits
