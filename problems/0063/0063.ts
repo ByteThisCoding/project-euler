@@ -12,6 +12,10 @@ export class Solution63 extends AbstractSolution {
         //return this.getNumNSatisfying(2n);
     }
 
+    /**
+     * Iterate over roots until we reach a point where the values grow too large
+     * @returns 
+     */
     private doSolve(): bigint {
         let lastSum = 9n;
         let sum = 9n;
@@ -22,6 +26,11 @@ export class Solution63 extends AbstractSolution {
         return sum;
     }
 
+    /**
+     * Check n digit numbers to see how many are n powers
+     * @param n 
+     * @returns 
+     */
     private getNumNSatisfying(n: bigint): bigint {
         const nMin = 10n**(n-1n);
         const nMax = nMin*10n - 1n;
@@ -36,8 +45,13 @@ export class Solution63 extends AbstractSolution {
         return lastRoot - firstRoot + 1n;
     }
 
+    /**
+     * Get the root of a given bigint
+     * @param base 
+     * @param root 
+     * @returns 
+     */
     private bigIntRoot(base: bigint, root: bigint) {
-
         let s = base + 1n;
         let k1 = root - 1n;
         let u = base;

@@ -14,21 +14,28 @@ export class Solution73 extends AbstractSolution {
         return this.doSolve(12_000);
     }
 
+    /**
+     * Count fractions for each denominator 2<=n<=limit
+     */
     private doSolve(limit: number): number {
         let count = 0;
         for (let n=2; n<=limit; n++) {
-            //console.log(n, this.countFracForD(n));
             count += this.countFracForD(n);
         }
         return count;
     }
 
+    /**
+     * Narrow down the search space to the left and right co prime range
+     *      between 1/3 and 1/2
+     * Coprime range is the denominator multiplied by those values
+     * @param d 
+     * @returns 
+     */
     private countFracForD(d: number): number {
 
         let leftCoPrimeRange = Math.ceil(d * 1/3);
         let rightCoPrimeRange = Math.floor(d * 1/2);
-
-        //console.log({leftCoPrimeRange, rightCoPrimeRange});
 
         let count = 0;
         if (leftCoPrimeRange > 1) {

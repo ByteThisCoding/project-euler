@@ -1,6 +1,6 @@
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 import * as fs from "fs";
-import { Graph, GraphNode, iGraphNode } from "@byte-this/collections";
+import { GraphNode, iGraphNode } from "@byte-this/collections";
 
 @RunSolution
 export class Solution83 extends AbstractSolution {
@@ -23,6 +23,7 @@ export class Solution83 extends AbstractSolution {
      * Connections are determined by moves allowed
      * 
      * Each distance will correspond to a node value
+     * This is an implementation of dijkstra's algorithm
      */
     private findPathSum(matrix: number[][]): number {
         //use @byte-this/collections to create node objects

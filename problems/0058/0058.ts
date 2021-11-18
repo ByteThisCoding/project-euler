@@ -12,6 +12,10 @@ export class Solution58 extends AbstractSolution {
         return this.doSolve();   
     }
 
+    /**
+     * Iterate over the spiral pattern and search form primes
+     * @returns 
+     */
     private doSolve(): number {
         let lastElement = 9;
         let plusValue = 4;

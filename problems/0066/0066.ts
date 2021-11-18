@@ -2,11 +2,6 @@ import { BigIntFraction } from "../../utils/bigint-fraction";
 import { BigIntUtils } from "../../utils/bigint-utils";
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 
-interface iSeqItem {
-    aTerm: bigint;
-    remainder: bigint[];
-}
-
 @RunSolution
 export class Solution66 extends AbstractSolution {
 
@@ -18,6 +13,11 @@ export class Solution66 extends AbstractSolution {
         return this.doSolve(1_000n);
     }
 
+    /**
+     * Find diophantine solutions for each value of 2<=D<=limit
+     * @param limit 
+     * @returns 
+     */
     private doSolve(limit: bigint): bigint {
         let maxD = 0n;
         let maxX = 0n;
@@ -33,6 +33,13 @@ export class Solution66 extends AbstractSolution {
         return maxD;
     }
 
+    /**
+     * Use a continued fraction to find solutions to this Pell's Equation
+     * At each point, generate the next seq term, then roll back the fraction
+     * When something is found, return the x value
+     * @param D 
+     * @returns 
+     */
     private findXValueDiophantine(D: bigint): bigint {
         const floorSqrtN: bigint = BigIntUtils.sqrt(D);
         if (floorSqrtN**2n === D) {
@@ -40,18 +47,13 @@ export class Solution66 extends AbstractSolution {
         }
 
         //determine first / initial element
-        let lastItem: iSeqItem = {
-            aTerm: floorSqrtN,
-            remainder: [-1n*floorSqrtN, 1n]
-        };
+        let seqATerms: bigint[] = [floorSqrtN];
+        let seqRemainders: bigint[][] = [[-1n*floorSqrtN, 1n]];
 
-        //console.log("initial", lastItem);
-
-        let seq: iSeqItem[] = [lastItem];
-
+        let lastIndex = 0;
         while (true) {
 
-            const frac = this.rollBackContinuedFrac(seq.map(item => item.aTerm));
+            const frac = this.rollBackContinuedFrac(seqATerms);
 
             const x = frac.getNumerator();
             const y = frac.getDenominator();
@@ -60,23 +62,21 @@ export class Solution66 extends AbstractSolution {
                 return x;
             }
 
-            const diff = D - lastItem.remainder[0]**2n;
+            const diff = D - seqRemainders[lastIndex][0]**2n;
 
-            let numerator = -1n*lastItem.remainder[0]*lastItem.remainder[1];
+            let numerator = -1n*seqRemainders[lastIndex][0]*seqRemainders[lastIndex][1];
             let denominator = diff;
 
-            const gcd = BigIntUtils.abs(BigIntUtils.gcdTwoNums(lastItem.remainder[1], denominator));
+            const gcd = BigIntUtils.abs(BigIntUtils.gcdTwoNums(seqRemainders[lastIndex][1], denominator));
 
-            const numeratorOffset = numerator+floorSqrtN*lastItem.remainder[1];
+            const numeratorOffset = numerator+floorSqrtN*seqRemainders[lastIndex][1];
             const aTerm = numeratorOffset/denominator;
             const adjustedNumerator = numerator - aTerm*diff;
 
-            lastItem = {
-                aTerm,
-                remainder: [adjustedNumerator/gcd, denominator/gcd]
-            };
 
-            seq.push(lastItem);
+            seqATerms.push(aTerm);
+            seqRemainders.push([adjustedNumerator/gcd, denominator/gcd]);
+            lastIndex++;
         }
 
     }
@@ -91,10 +91,7 @@ export class Solution66 extends AbstractSolution {
             ).addBigIntFraction(
                 BigIntFraction.ONE.divideBigIntFraction(partialFrac)
             );
-            //console.log(partialFrac.toString());
         };
-
-        //console.log(partialFrac.toString());
 
         return partialFrac;
     }

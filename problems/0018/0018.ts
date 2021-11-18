@@ -29,6 +29,7 @@ export class Solution18 extends AbstractSolution {
         });
 
 
+    //use this to cache so we don't explore branches more than once
     private calcMap = new Map<string, number>();
 
     getProblemName(): string {

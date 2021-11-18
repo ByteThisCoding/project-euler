@@ -11,6 +11,11 @@ export class Solution85 extends AbstractSolution {
         return this.doSolve();
     }
 
+    /**
+     * Search for best n and m combination
+     * Iterate over n values, find m's with binary search
+     * If m=1, we've exhausted possible n values
+     */
     private doSolve(): number {
         const target = 2_000_000;
 
@@ -33,6 +38,7 @@ export class Solution85 extends AbstractSolution {
 
     /**
      * For a particular n, find the m that will get closest to the target
+     * This uses binary search to find the value
      * @param n 
      * @param target 
      */
@@ -89,14 +95,12 @@ export class Solution85 extends AbstractSolution {
         for (let c = 2; c < n; c++) {
             for (let d = 1; d <= Math.min(c, m); d++) {
                 count += this.calcSubRectangle(n, m, c, d);
-                //console.log({c,d}, this.calcSubRectangle(n, m, c, d));
             }
         }
 
         // Count remaining
         for (let d = 1; d < m; d++) {
             count += this.calcSubRectangle(n, m, n, d);
-            //console.log({n,d}, this.calcSubRectangle(n, m, n, d));
         }
 
         return count;

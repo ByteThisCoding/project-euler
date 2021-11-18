@@ -9,10 +9,7 @@ export class Solution88 extends AbstractSolution {
 
     protected solve() {
         //return this.findMinForK(5);
-        //return this.findMinForK(10);
         //return this.findMinForK(12_000);
-        //return this.doSolve(6);
-        //return this.doSolve(12);
         //return this.doSolve(26);
         return this.doSolve(12_000);
     }
@@ -34,6 +31,8 @@ export class Solution88 extends AbstractSolution {
 
     /**
      * Assumes k>2
+     * Find min for k by starting with 2, 2, 1.....
+     * Keep incrementing highest value and number of non 1 terms
      * @param k 
      * @returns 
      */

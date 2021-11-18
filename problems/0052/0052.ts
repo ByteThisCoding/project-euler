@@ -12,6 +12,11 @@ export class Solution52 extends AbstractSolution {
         return this.doSolve(6);
     }
 
+    /**
+     * Keep searching until we find something which matches the criteria
+     * @param limit 
+     * @returns 
+     */
     private doSolve(limit: number): number {
         for (let x=10; true; x++) {
             if (this.isValidPerm(x, limit)) {
@@ -21,6 +26,13 @@ export class Solution52 extends AbstractSolution {
     }
 
 
+    /**
+     * Check if x, and multiple from limit down to 1, are digit permutations
+     * If a non-match is found, return false
+     * @param x 
+     * @param limit 
+     * @returns 
+     */
     private isValidPerm(x: number, limit: number): boolean {
 
         for (let i=limit; i>1; i--) {

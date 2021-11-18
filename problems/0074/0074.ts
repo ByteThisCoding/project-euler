@@ -1,12 +1,13 @@
-import { Combinations } from "../../utils/combinations";
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 
 @RunSolution
 export class Solution74 extends AbstractSolution {
 
+    //cache chain lengths and chain sequences to reduce redundant operations
     private chainLenCache = new Map<string, number>();
     private factorialMapCache = new Map<string, bigint>();
 
+    //since we only do factorials for some values, precalculate them
     private factorialMap = [
         1n,
         1n,
@@ -25,17 +26,17 @@ export class Solution74 extends AbstractSolution {
     }
 
     protected solve() {
-        /*console.log(this.getChainLength(69n));
-        console.log(this.getChainLength(169n));
-        console.log(this.chainLenCache);
-        console.log(this.factorialMapCache);*/
-
         //console.log(this.getChainLength(58n));
         //console.log(this.chainLenCache);
 
         return this.doSolve();
     }
 
+    /**
+     * For each 1<=n<limit, get chain length
+     * This takes advantage of caching
+     * @returns 
+     */
     private doSolve(): number {
         let sixtyCount = 0;
         let longestN = 0n;
@@ -60,6 +61,7 @@ export class Solution74 extends AbstractSolution {
             return this.chainLenCache.get(key)!;
         }
 
+        //map the entry to the index it appeared
         const chainEntries = new Map<string, number>();
 
         chainEntries.set(key, 1);
@@ -71,7 +73,6 @@ export class Solution74 extends AbstractSolution {
             n = this.mapFactorial(n);
             key = this.getMapKey(n);
             if (this.chainLenCache.has(key)) {
-                //console.log({n, index, cv: this.chainLenCache.get(key)!})
                 index += this.chainLenCache.get(key)!;
                 break;
             } else {
@@ -86,9 +87,7 @@ export class Solution74 extends AbstractSolution {
             }
         }
 
-        //console.log("----", chainEntries);
         Array.from(chainEntries).forEach(([chainN, ind], _, ar) => {
-            //console.log(chainN);
             if (loopStart > -1 && ind >= loopStart) {
                 this.chainLenCache.set(chainN, loopLen);
             } else {
@@ -100,6 +99,11 @@ export class Solution74 extends AbstractSolution {
         return index - 1;
     }
 
+    /**
+     * Cache factorial map sum reductions
+     * @param n 
+     * @returns 
+     */
     private mapFactorial(n: bigint): bigint {
         const key = this.getMapKey(n);
         if (!this.factorialMapCache.has(key)) {
@@ -119,8 +123,7 @@ export class Solution74 extends AbstractSolution {
 
     private getMapKey(n: bigint): string {
         return Array.from(n.toString())
-        .sort().join("");
-        //return n.toString();
+            .sort().join("");
     }
 
 }

@@ -18,6 +18,13 @@ export class Solution79 extends AbstractSolution {
         return this.determineShortestPassword(loginAttempts);
     }
 
+    /**
+     * Use a graph structure to keep track of which chars appear after the others
+     * The shortest path between the char with no incomming connections
+     *      and the char with no outgoing connection is the shortest password
+     * @param loginAttempts 
+     * @returns 
+     */
     private determineShortestPassword(loginAttempts: string[][]): string {
 
         //we'll use a graph to represent chars

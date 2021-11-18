@@ -16,7 +16,10 @@ export class Solution57 extends AbstractSolution {
         let numBigIntFractionsLongerDenominator = 0;
         const fracTwo = new BigIntFraction(2n, 1n);
 
+        //this will be the expansion carry value
         let fracPart = new BigIntFraction(1n, 2n);
+
+        //keep performing expansions up to the limit
         for (let i=1; i<limit; i++) {
             fracPart = BigIntFraction.ONE
                 .divideBigIntFraction(
@@ -24,11 +27,15 @@ export class Solution57 extends AbstractSolution {
                 );
 
             const fullFrac = BigIntFraction.ONE.addBigIntFraction(fracPart);
-            //console.log(fullFrac.toString());
-            if (fullFrac.getNumerator().toString().length > fullFrac.getDenominator().toString().length) {
+
+            //compare denominator lengths
+            if (fullFrac.getNumerator() > fullFrac.getDenominator()
+                && fullFrac.getNumerator().toString().length > fullFrac.getDenominator().toString().length
+            ) {
                 numBigIntFractionsLongerDenominator ++;
             }
         }
+
 
         return numBigIntFractionsLongerDenominator;
     }

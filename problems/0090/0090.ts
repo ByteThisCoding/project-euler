@@ -11,6 +11,9 @@ export class Solution90 extends AbstractSolution {
         return this.doSolve();
     }
 
+    /**
+     * Keep generating dice and checking if they are valid pairs
+     */
     private doSolve(): number {
         let validDiceSet = new Set<string>();
 

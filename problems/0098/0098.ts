@@ -22,6 +22,9 @@ export class Solution98 extends AbstractSolution {
         return this.doSolve();
     }
 
+    /**
+     * Iterate over anagrams, store in cache, and process
+     */
     private async doSolve(): Promise<bigint> {
         const wordLens = new Set<number>();
         //read each word and add to map

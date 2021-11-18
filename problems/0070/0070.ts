@@ -29,8 +29,6 @@ export class Solution70 extends AbstractSolution {
         );
         let maxPrimeIndex = Primes.getNthPrimeIndex(maxPrime);
 
-        console.log({ maxPrime, maxPrimeIndex })
-
         let n = 0;
         let totientRatio = Infinity;
         let totient = 0;
@@ -57,10 +55,8 @@ export class Solution70 extends AbstractSolution {
             }
         }
 
-        console.log({ n, totient, totientRatio })
         return n;
 
     }
 
 }
-//8319823

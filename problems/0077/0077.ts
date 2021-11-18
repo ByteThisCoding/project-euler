@@ -13,6 +13,14 @@ export class Solution77 extends AbstractSolution {
         return this.doSolve(5_000);
     }
 
+    /**
+     * This uses the dynamic programming coin counting algorithm
+     * Each prime is a coin
+     * Since the target will be a value in a cell, not a coin
+     *      we'll need to resize the matrix and fill in entries as we go
+     * @param target 
+     * @returns 
+     */
     private doSolve(target: number): number {
 
         const startNumPrimes = 3;
@@ -49,9 +57,6 @@ export class Solution77 extends AbstractSolution {
             }
         }
 
-        //console.log("initial", matrix);
-        //throw null;
-
         //keep searching until we find the target
         while (true) {
 
@@ -60,14 +65,9 @@ export class Solution77 extends AbstractSolution {
             
             coins.push(thisPrime);
 
-            //console.log(thisPrime);
-
             while (matrix[0].length <= thisPrime) {
                 matrix[0].push(0);
             }
-
-            //console.log(matrix);
-            //throw null;
 
             //fill out cols to the right
             for (let rowIndex = 1; rowIndex < matrix.length; rowIndex ++) {
@@ -105,8 +105,6 @@ export class Solution77 extends AbstractSolution {
             matrix.push(
                 newRow
             );
-
-            //console.log("....", thisPrime, matrix);
         }
 
     }

@@ -4,6 +4,7 @@ import * as fs from "fs";
 @RunSolution
 export class Solution89 extends AbstractSolution {
 
+    //we're including chars with subtractions
     private romanCharMap: {[key: string]: number} = {
         "I": 1,
         "IV": 4,
@@ -33,7 +34,6 @@ export class Solution89 extends AbstractSolution {
     protected solve() {
         //return this.romanToNumber("XVI");
         //return this.numberToRoman(14);
-        //return this.numberToRoman(16);
         /*const num = this.romanToNumber("MMMMDCCCCXXXXVI");
         return this.numberToRoman(num);*/
         return this.doSolve();

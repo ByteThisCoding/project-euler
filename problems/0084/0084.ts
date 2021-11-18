@@ -25,8 +25,6 @@ export class Solution84 extends AbstractSolution {
         //we can't use Matrix.getProbs because this matrix is large
         //we will use an estimation method instead
         const probEst = this.estimateEndStateProbabilities(markovChain);
-        
-        //console.log(probEst.map(item => item.toNumber().toFixed(3)));
 
         //copy array so we don't sort original one
         const probEstSorted = [...probEst].sort((a, b) => b.compareTo(a));

@@ -43,9 +43,7 @@ export class Solution94 extends AbstractSolution {
                 const nSub = (sqrtPlus - 1n) / 3n;
                 const calc = nSub * 3n - 1n;
                 if (calc <= limit) {
-                    //console.log("-", nSub, nSub - 1n, ".", x, y, calc);
                     sum += calc;
-                    //console.log(".....", sum);
                 } else {
                     stop();
                 }
@@ -53,9 +51,7 @@ export class Solution94 extends AbstractSolution {
                 const nAdd = (sqrtPlus + 1n) / 3n;
                 const calc = nAdd * 3n + 1n;
                 if (calc <= limit) {
-                    //console.log("+", nAdd, nAdd + 1n, ".", x, y, calc);
                     sum += calc;
-                    //console.log(".....", sum);
                 } else {
                     stop();
                 }

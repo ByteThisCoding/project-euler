@@ -3,11 +3,14 @@ import { AbstractSolution, RunSolution } from "../../utils/solution";
 @RunSolution
 export class Solution92 extends AbstractSolution {
 
+    //cache numbers which eventually lead to 89 as true and 1 as false
+    //start with 89 and 1, add others as we go
     private smallMap89 = new Map<number, boolean>([
         [89, true],
         [1, false]
     ]);
 
+    //precompute and reference digit squares
     private squareDigitMap: {[key: number]: number} = {
         0: 0,
         1: 1,
@@ -29,6 +32,13 @@ export class Solution92 extends AbstractSolution {
         return this.doSolve(10_000_000);
     }
 
+    /**
+     * For small values of n, compute and add all parts of the
+     *      iteration and results to the cache map
+     * 
+     * For larger values, check map once and do everything
+     *      else without the map 
+     */
     private doSolve(limit: number): number {
         let count = 0;
         const smallLimit = Math.min(300, limit);
@@ -41,6 +51,12 @@ export class Solution92 extends AbstractSolution {
         return count;
     }
 
+    /**
+     * For smaller values of n, we'll compute and add to the map
+     * Each iteration adds to the map
+     * @param n 
+     * @returns 
+     */
     private doesSmallNArriveAt89(n: number): boolean {
         const seq: number[] = [];
         while (true) {
@@ -66,6 +82,12 @@ export class Solution92 extends AbstractSolution {
         }
     }
 
+    /**
+     * For larger values of n, we'll only check the map initially
+     * We won't add new entries to the map
+     * @param n 
+     * @returns 
+     */
     private doesNArriveAt89(n: number): boolean {
         
         while (true) {

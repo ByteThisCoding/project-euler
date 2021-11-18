@@ -4,6 +4,7 @@ import fs from "fs";
 @RunSolution
 export class Solution67 extends AbstractSolution {
 
+    //use this to cache so we don't explore branches more than once
     private calcMap = new Map<string, number>();
 
     getProblemName(): string {
@@ -14,19 +15,15 @@ export class Solution67 extends AbstractSolution {
         return this.calcBranch(this.getInput(), 0, 0);
     }
 
-    private getInput(): number[][] {
-        const input = fs.readFileSync(__dirname + "/triangle.txt", "utf-8");
-
-        return input.split("\n")
-            .filter(line => !!line.trim())
-            .map(line => {
-                return line.replace(/\s+/g, " ")
-                    .split(" ")
-                    .filter(str => !!str.trim())
-                    .map(numStr => parseInt(numStr));
-            });
-    }
-
+    /**
+     * Recursive implementation
+     * We'll branch out in the available paths
+     * Using a cache enables us to avoid exploring subtrees more than once
+     * @param input 
+     * @param rowIndex 
+     * @param columnIndex 
+     * @returns 
+     */
     private calcBranch(input: number[][], rowIndex: number, columnIndex: number): number {
 
         let sum = 0;
@@ -56,6 +53,20 @@ export class Solution67 extends AbstractSolution {
         }
 
         return sum;
+    }
+
+    //read the input and map to 2d array
+    private getInput(): number[][] {
+        const input = fs.readFileSync(__dirname + "/triangle.txt", "utf-8");
+
+        return input.split("\n")
+            .filter(line => !!line.trim())
+            .map(line => {
+                return line.replace(/\s+/g, " ")
+                    .split(" ")
+                    .filter(str => !!str.trim())
+                    .map(numStr => parseInt(numStr));
+            });
     }
 
 }

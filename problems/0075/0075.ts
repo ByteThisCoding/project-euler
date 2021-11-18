@@ -13,12 +13,25 @@ export class Solution75 extends AbstractSolution {
         return this.doSolve(1_500_000);
     }
 
+    /**
+     * We'll generate pythagorean triples using:
+     * : for each n,m which are integers
+     * : generate a = m**2 - n**2
+     * : generate b = 2*m*n
+     * : generate c = m**2 + n**2
+     * : given the above, multiply by k up to limit for more triples
+     * 
+     * If we encounter a line length more than once, decrement count
+     * @param limit 
+     * @returns 
+     */
     private doSolve(limit: number): number {
 
         let count = 0;
 
         const lineLenMap = new Map<number, number>();
         const loopLimit = Math.sqrt(limit / 2);
+        
         for (let m=2; m < loopLimit; m++) {
 
             const mSq = m**2;

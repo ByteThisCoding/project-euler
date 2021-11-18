@@ -13,6 +13,10 @@ export class Solution55 extends AbstractSolution {
         //return this.isLychrelNumber(47);
     }
 
+    /**
+     * Loop through numbers
+     * Count # of lychrel numbers and return
+     */
     private doSolve(): number {
         let numLychrelCount = 0;
 
@@ -29,6 +33,7 @@ export class Solution55 extends AbstractSolution {
 
         let currentN = n;
         for (let numSteps=0; numSteps<50; numSteps++) {
+            //make the number to array of chars, reverse array, join, and parse int
             const nReverse = parseInt(Array.from(currentN.toString()).reverse().join(""));
             currentN += nReverse;
             if (Palindrome.isPalindrome(currentN)) {

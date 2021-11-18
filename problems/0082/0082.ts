@@ -19,6 +19,8 @@ export class Solution82 extends AbstractSolution {
 
     /**
      * Use dynamic approach to construct from bottom right to top left
+     * Since we'll never want to move up, then down, in the same colum
+     *      we'll ignore that possibility (same for down, then up)
      */
     private findPathSum(matrix: number[][]): number {
         const subSums = new Array(matrix.length)

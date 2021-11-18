@@ -66,11 +66,6 @@ export class Solution93 extends AbstractSolution {
             .filter(n => n > 0)
             .sort((a, b) => a - b);
 
-        /*console.log({
-            set,
-            r: sorted
-        });*/
-
         let longestSeqLen = 0;
 
         let thisSeqLen = 0;

@@ -11,12 +11,14 @@ export class Solution71 extends AbstractSolution {
 
     protected solve() {
         return this.efficientSolve(1_000_000n);
-        //return this.inefficientSolve(50n);
-        //return this.inefficientSolve(1_000_000n);
-        //const nums = this.getCoprimeNumerators(1234567n);
-        //return this.findBetterFraction(nums, 1234567n, new BigIntFraction(2n, 7n), new BigIntFraction(3n, 7n));
     }
 
+    /**
+     * We can solve by doing something which represents
+     *      repeatedly adding 3 in the numerator and 7 in the denominator
+     * @param limit 
+     * @returns 
+     */
     private efficientSolve(limit: bigint): bigint {
         //search frac is implicit in algorithm, so commented out
         //const searchLeftFrac = new BigIntFraction(3n, 7n);
@@ -26,6 +28,12 @@ export class Solution71 extends AbstractSolution {
         return 2n + 3n*(numMultiply-1n);
     }
 
+    /**
+     * This is not used, as a better way exists
+     * We've left this here for reference purposes
+     * @param limit 
+     * @returns 
+     */
     private inefficientSolve(limit: bigint): bigint {
         const searchLeftFrac = new BigIntFraction(3n, 7n);
 

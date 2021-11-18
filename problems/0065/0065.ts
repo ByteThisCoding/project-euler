@@ -13,6 +13,8 @@ export class Solution65 extends AbstractSolution {
     }
 
     /**
+     * Generate the sequence of e
+     * Then, iteratively roll back the sequence into a fraction
      * Assumes limit >= 2
      * @param limit 
      */
@@ -34,21 +36,25 @@ export class Solution65 extends AbstractSolution {
 
         //roll back
         let partialFrac = new BigIntFraction(1n, seq[seq.length - 1]);
-        //let partialFrac = BigIntFraction.ONE;
         for (let i=seq.length - 2; i>=0; i--) {
             const seqFrac = new BigIntFraction(seq[i], 1n);
             partialFrac = BigIntFraction.ONE.divideBigIntFraction(seqFrac.addBigIntFraction(partialFrac));
-            //partialFrac = seqFrac.addBigIntFraction(partialFrac);
-            //console.log("p", seqFrac.toString(), partialFrac.toString());
         }
 
         const fullFrac = new BigIntFraction(offset, 1n).addBigIntFraction(partialFrac);
+        return this.getDigitsSum(fullFrac.getNumerator());
+    }
 
-        console.log(/*seq, */fullFrac.toString());
-
-        const numeratorDigits = Array.from(fullFrac.getNumerator().toString());
-        return numeratorDigits.reduce((acc, intStr) => acc + BigInt(intStr), 0n);
-
+    /**
+     * Get the sum of each digit in a bigint
+     */
+    private getDigitsSum(n: bigint): bigint {
+        const nStr = n.toString();
+        let sum = 0n;
+        for (let i=0; i<nStr.length; i++) {
+            sum += BigInt(nStr[i]);
+        }
+        return sum;
     }
 
 }

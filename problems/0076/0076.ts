@@ -12,10 +12,13 @@ export class Solution76 extends AbstractSolution {
         return this.doSolve(100);
     }
 
+    /**
+     * This uses the dynamic programming count counting approach
+     * Each integer is its own coin
+     * @param target 
+     * @returns 
+     */
     private doSolve(target: number): number {
-        /*const coins = new Array(target - 1)
-            .fill(0)
-            .map((_, ind) => ind + 1);*/
 
         const matrix = new Array(target)
             .fill(null)
@@ -25,7 +28,6 @@ export class Solution76 extends AbstractSolution {
                 return newAr;
             });
 
-        //console.log("initial", matrix);
 
         for (let rowIndex = 1; rowIndex < target; rowIndex++) {
 
@@ -43,8 +45,6 @@ export class Solution76 extends AbstractSolution {
             }
 
         }
-
-        //console.log("==>", matrix);
 
         return matrix[target - 1][target];
     }

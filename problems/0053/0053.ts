@@ -9,16 +9,19 @@ export class Solution53 extends AbstractSolution {
     }
 
     protected solve() {
-        //return Combinations.chooseNFromRCount(23n, 1n);
         return this.doSolve();
     }
 
+    /**
+     * Iterate over different values of n and r <= n
+     * Count values up to limit which are greater than 1 million
+     * @returns 
+     */
     private doSolve(): number {
 
         let numGreater = 0;
 
         for (let n=1n; n<=100n; n++) {
-
             for (let r=1n; r<=n; r++) {
 
                 if (Combinations.chooseNFromRCount(n, r) > 1_000_000) {
@@ -26,11 +29,9 @@ export class Solution53 extends AbstractSolution {
                 }
 
             }
-
         }
 
         return numGreater;
-
     }
 
     /****

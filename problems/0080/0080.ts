@@ -27,6 +27,13 @@ export class Solution80 extends AbstractSolution {
         return sum;
     }
 
+    /**
+     * Create continued fraction sequence
+     * Then, roll it into fraction
+     * Then, divide fraction parts to get digits
+     * @param n 
+     * @returns 
+     */
     private getSumForN(n: bigint): bigint {
         const floorSqrtN = BigIntUtils.sqrt(n);
         if (floorSqrtN**2n === n) {
@@ -39,6 +46,13 @@ export class Solution80 extends AbstractSolution {
         return this.divideSumDigits(floorSqrtN, frac);
     }
 
+    /**
+     * Get the sum of the digits of the first 100 digits
+     * Roll back continued fraction to a certain point to get this value
+     * @param floorSqrtN 
+     * @param frac 
+     * @returns 
+     */
     private divideSumDigits(floorSqrtN: bigint, frac: BigIntFraction): bigint {
 
         //if limit was >=100, we would need to sum up digits of floorSqrtN itself and adjust loop
@@ -81,7 +95,7 @@ export class Solution80 extends AbstractSolution {
 
     /**
      * Get continued fraction sequence
-     * @param floorSqrtN 
+     * @param floorSqrtN fed in to reduce redundant calculations
      * @param n 
      * @returns 
      */
@@ -112,8 +126,8 @@ export class Solution80 extends AbstractSolution {
                 aTerm,
                 remainder: [adjustedNumerator/gcd, denominator/gcd]
             };
-            const key = `${aTerm},${lastItem.remainder}`;
 
+            const key = `${aTerm},${lastItem.remainder}`;
             if (seqHits.has(key)) {
                 return seq;
             } else {

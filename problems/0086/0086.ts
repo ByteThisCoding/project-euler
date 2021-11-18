@@ -86,7 +86,6 @@ export class Solution86 extends AbstractSolution {
             mMax = mKeys[i][0];
         }
 
-        console.log("Count: ", count);
         return mMax;
     }
 

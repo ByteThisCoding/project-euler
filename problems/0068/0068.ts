@@ -3,6 +3,7 @@ import { AbstractSolution, RunSolution } from "../../utils/solution";
 @RunSolution
 export class Solution68 extends AbstractSolution {
 
+    //cache to help with generating permutations
     private choicesMap = new Map<string, number[][]>();
 
     getProblemName(): string {
@@ -67,6 +68,11 @@ export class Solution68 extends AbstractSolution {
         return maxNumber;
     }
 
+    /**
+     * Get permutations and remove invalid options
+     * @param upperNumber 
+     * @returns 
+     */
     private getValidSeqPerms(upperNumber: number): number[][] {
         const choices = new Array(upperNumber).fill(0)
             .map((_, ind) => ind + 1);
@@ -84,6 +90,12 @@ export class Solution68 extends AbstractSolution {
         return seqPerms;
     }
 
+    /**
+     * Get permutations for each different choices lengths
+     * Uses caching to avoid redundant operations
+     * @param choices 
+     * @returns 
+     */
     private getNumPerms(choices: number[]): number[][] {
         if (choices.length === 1) {
             return [choices];

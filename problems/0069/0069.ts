@@ -14,7 +14,7 @@ export class Solution69 extends AbstractSolution {
 
     /**
      * We'll use a dynamic programming approach to save time
-     * getTotientsUpTo builds an array of all totients up to limit
+     * "getTotientsUpTo" builds an array of all totients up to limit
      * @param limit 
      * @returns 
      */

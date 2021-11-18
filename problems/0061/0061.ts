@@ -9,6 +9,8 @@ import { AbstractSolution, RunSolution } from "../../utils/solution";
 @RunSolution
 export class Solution61 extends AbstractSolution {
 
+    private seqNames = ["triangle", "square", "pentagonal", "hexagonal", "heptagonal", "octagonal"];
+
     getProblemName(): string {
         return "Cyclical Figurate Numbers";
     }
@@ -16,6 +18,17 @@ export class Solution61 extends AbstractSolution {
     protected solve() {
         return this.iterateSeq(1_000, 10_000, "triangle");
     }
+
+    /**
+     * Iterate a sequence over a given range
+     * Recursive implementation follows sequences down and tightens up the possible ranges
+     * @param rangeStart 
+     * @param rangeEnd 
+     * @param currentSeq 
+     * @param initialValue 
+     * @param seqVisited 
+     * @returns 
+     */
     private iterateSeq(rangeStart: number, rangeEnd: number, currentSeq: string, initialValue: number = -1, seqVisited: string[] = []): number {
 
         const seqClass = this.getSeqClasses(currentSeq);
@@ -57,6 +70,11 @@ export class Solution61 extends AbstractSolution {
         return subSum;
     }
 
+    /**
+     * Get the sequence class based on the string name
+     * @param currentSeq 
+     * @returns 
+     */
     private getSeqClasses(currentSeq: string): any {
         let seqClass: any;
         switch (currentSeq) {
@@ -83,8 +101,14 @@ export class Solution61 extends AbstractSolution {
         return seqClass
     }
 
+
+    /**
+     * Given a string of visited sequences, check which ones we have left
+     * @param visitedSeq 
+     * @returns 
+     */
     private getUnvisitedSeq(visitedSeq: string[]): string[] {
-        return ["triangle", "square", "pentagonal", "hexagonal", "heptagonal", "octagonal"].filter(
+        return this.seqNames.filter(
             className => visitedSeq.indexOf(className) === -1
         );
     }

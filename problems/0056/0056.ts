@@ -11,12 +11,15 @@ export class Solution56 extends AbstractSolution {
         return this.doSolve();
     }
 
+    /**
+     * Iterate over a and b values and perform digital sums
+     * @returns 
+     */
     private doSolve(): bigint {
         //include all 1 sums
         let maxDigitalSum = 1n;
 
         for (let a=2n; a<100n; a++) {
-
             for (let b=1n; b<100n; b++) {
 
                 const thisDigitalSum = this.getPowerDigitalSum(a, b);
@@ -25,25 +28,30 @@ export class Solution56 extends AbstractSolution {
                 }
 
             }
-
         }
 
         return maxDigitalSum;
     }
 
+    /**
+     * If multiple of ten, then everything but 
+     * @param a 
+     * @param b 
+     * @returns 
+     */
     private getPowerDigitalSum(a: bigint, b: bigint): bigint {
-        if (b === 1n) {
-            return a;
-        }
-
         if (a % 10n === 0n) {
+            //it could be anything from 1 to 9, but since it won't be largest anyway, this is fine
             return 1n;
         }
 
         const powerValue = a**b;
-        const powerDigits = Array.from(powerValue.toString());
-        
-        return powerDigits.reduce((acc, digitStr) => acc + BigInt(digitStr), 0n);
+        const powerString = powerValue.toString();
+        let sum = 0n;
+        for (let i=0; i<powerString.length; i++) {
+            sum += BigInt(powerString[i]);
+        }
+        return sum;
 
     }
 

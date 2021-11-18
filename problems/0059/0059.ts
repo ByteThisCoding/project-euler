@@ -5,6 +5,11 @@ const fs = require("fs");
 @RunSolution
 export class Solution59 extends AbstractSolution {
 
+    //generate an array of all letters (we could type this out manually if we wanted to)
+    private letters = new Array(26).fill(0).map((_, index) => 97+index).map(
+        code => String.fromCharCode(code)
+    );
+
     getProblemName(): string {
         return "XOR Decryption";
     }
@@ -13,13 +18,14 @@ export class Solution59 extends AbstractSolution {
         return this.doSolve();
     }
 
+    /**
+     * Iterate over possible 3 letter passwords and attempt to decrypt with each one
+     * @returns 
+     */
     private doSolve(): number {
         const cipherCodes = this.loadCodes();
-        const letters = new Array(26).fill(0).map((_, index) => 97+index).map(
-            code => String.fromCharCode(code)
-        );
         let sum = -1;
-        Combinations.forEachNPossibilities(3, letters, pwdThree => {
+        Combinations.forEachNPossibilities(3, this.letters, pwdThree => {
             sum = this.decipherText(pwdThree, cipherCodes);
             if (sum > -1) {
                 //stop generating possibilities
@@ -29,6 +35,12 @@ export class Solution59 extends AbstractSolution {
         return sum;
     }
 
+    /**
+     * We'll use common words with spaces to check if we've found the decrypted version
+     * @param pwdThree 
+     * @param codes 
+     * @returns 
+     */
     private decipherText(pwdThree: string, codes: number[]): number {
         const commonWords = [
             "and",
@@ -52,13 +64,14 @@ export class Solution59 extends AbstractSolution {
         }
 
         if (hasCommonWords) {
-            console.log(plainText);
+            //console.log(plainText);
             return plainCodes.reduce((acc, code) => acc + code);
         } else {
             return -1;
         }
     }
 
+    //read the file synchronously and split by comma
     private loadCodes(): number[] {
         const codesStr = fs.readFileSync(__dirname+"/p059_cipher.txt", "utf-8");
         return codesStr.split(",").map((code: string) => parseInt(code));

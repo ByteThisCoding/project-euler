@@ -12,6 +12,13 @@ export class Solution91 extends AbstractSolution {
         return this.doSolve(50);
     }
 
+    /**
+     * Iterate over x and y dimensions
+     * For each, iterate over smaller x and y dimensions
+     * Check if the coordinate pairs form valid triangles and count
+     * @param limit 
+     * @returns 
+     */
     private doSolve(limit: number): number {
 
         let count = 0;

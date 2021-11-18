@@ -27,6 +27,12 @@ export class Solution54 extends AbstractSolution {
         return this.doSolve(__dirname+"/poker.txt");
     }
 
+    /**
+     * For each line, rank the left hand and right hand seperately
+     * If left > right, left hand wins
+     * @param fileName 
+     * @returns 
+     */
     private async doSolve(fileName: string): Promise<number> {
         let numLeftHandWins = 0;
         await this.readFileLines(fileName, (line) => {
@@ -84,9 +90,6 @@ export class Solution54 extends AbstractSolution {
                 rightHandCards.push(card);
             }
         });
-
-        /*console.log(JSON.stringify([this.mapCardsToHand(leftHandCards),
-            this.mapCardsToHand(rightHandCards)]))*/
 
         return [
             this.mapCardsToHand(leftHandCards),

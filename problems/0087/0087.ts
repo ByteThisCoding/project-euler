@@ -17,11 +17,16 @@ export class Solution87 extends AbstractSolution {
         return this.doSolve(50_000_000);
     }
 
+    /**
+     * Iterate over the primes and generate powers
+     * Then, form partial sums for each and count matches
+     * @param limit 
+     * @returns 
+     */
     private doSolve(limit: number): number {
 
         Primes.iterateOverPrimes((prime: number, stop: Function) => {
-            const keepGoing = this.generateForPrime(prime, limit);
-            if (!keepGoing) {
+            if (!this.generateForPrime(prime, limit)) {
                 stop();
             }
         });

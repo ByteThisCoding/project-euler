@@ -1,5 +1,4 @@
 import { Integer } from "../../utils/integer";
-import { Primes } from "../../utils/primes";
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 
 @RunSolution
@@ -17,10 +16,15 @@ export class Solution95 extends AbstractSolution {
         return this.doSolve(1_000_000);
     }
 
+    /**
+     * Check n for chains from 1<=n<=limit
+     * Then, iterate over cache to find the match
+     * @param limit 
+     * @returns 
+     */
     private doSolve(limit: number): number {
         //create chains
         for (let n=1; n<=limit; n++) {
-            //console.log(n);
             this.processN(n, limit);
         }
 
@@ -40,6 +44,13 @@ export class Solution95 extends AbstractSolution {
         return smallest;
     }
 
+    /**
+     * Check if n either exists in a chain or yields it
+     * Cache values as we go through the iteration
+     * @param n 
+     * @param limit 
+     * @returns 
+     */
     private processN(n: number, limit: number): void {
         if (this.visited.has(n)) {
             return;

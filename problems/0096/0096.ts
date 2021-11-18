@@ -25,7 +25,11 @@ export class Solution96 extends AbstractSolution {
         return this.doSolve();
     }
 
-    //reading the file is async
+    /**
+     * Reading the file is async
+     * Use the sudoku-puzzle class to find the solution
+     * @returns 
+     */
     private async doSolve(): Promise<number> {
         let sum = 0;
         await this.readFilePuzzles((data: iSortedPuzzle) => {

@@ -12,6 +12,10 @@ export class Solution99 extends AbstractSolution {
         return this.doSolve();
     }
 
+    /**
+     * For each base pair, convert base to 2 and adjust exponent
+     * Return maximum line
+     */
     private doSolve(): number {
         const pairs = this.readFile();
 
