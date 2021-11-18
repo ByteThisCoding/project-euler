@@ -38,10 +38,16 @@ export class Solution11 extends AbstractSolution {
         return this.bruteForceSolve(this.INPUT);
     }
 
+    /**
+     * Iterate over each column in each row
+     * For each cell, check the group against the input
+     * @param input 
+     * @returns 
+     */
     private bruteForceSolve(input: number[][]): number {
         let product = 0;
-        for (let iRow=0; iRow < input.length; iRow ++) {
-            for (let iCol=0; iCol < input[iRow].length; iCol ++) {
+        for (let iRow = 0; iRow < input.length; iRow++) {
+            for (let iCol = 0; iCol < input[iRow].length; iCol++) {
                 product = Math.max(
                     product,
                     this.bruteForceCheckGroups(iRow, iCol, input)
@@ -52,22 +58,21 @@ export class Solution11 extends AbstractSolution {
         return product;
     }
 
+    /**
+     * Check the colums, rows, and diagnoals
+     * @param rowPos 
+     * @param colPos 
+     * @param input 
+     * @returns 
+     */
     private bruteForceCheckGroups(rowPos: number, colPos: number, input: number[][]): number {
 
         let product = 0;
 
-        const calcGroup = (fourGroup: number[]): void => {
-            const groupProduct = fourGroup.reduce((acc, num) => acc * num);
-            product = Math.max(
-                product,
-                groupProduct
-            );
-        }
-
         //check row
         if (colPos < input[0].length - 3) {
             const fourGroup = input[rowPos].slice(colPos, colPos + 4);
-            calcGroup(fourGroup);
+            product = this.calcGroup(fourGroup, product);
         }
 
         //check col
@@ -75,7 +80,7 @@ export class Solution11 extends AbstractSolution {
             const fourGroup = input.slice(rowPos, rowPos + 4).map(row => {
                 return row[colPos];
             });
-            calcGroup(fourGroup);
+            product = this.calcGroup(fourGroup, product);
         }
 
         //check diagonal down and to the left
@@ -83,17 +88,26 @@ export class Solution11 extends AbstractSolution {
             const fourGroup = input.slice(rowPos, rowPos + 4).map((row, it) => {
                 return row[colPos - it];
             });
-            calcGroup(fourGroup);
+            product = this.calcGroup(fourGroup, product);
         }
 
         if (colPos < input[0].length - 3 && rowPos < input.length - 3) {
             const fourGroup = input.slice(rowPos, rowPos + 4).map((row, it) => {
                 return row[colPos + it];
             });
-            calcGroup(fourGroup);
+            product = this.calcGroup(fourGroup, product);
         }
 
         return product;
+    }
+
+    //we'll store some logic in this callback to reduce code duplication
+    private calcGroup(fourGroup: number[], product: number): number {
+        const groupProduct = fourGroup.reduce((acc, num) => acc * num);
+        return Math.max(
+            product,
+            groupProduct
+        );
     }
 
 }

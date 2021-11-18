@@ -43,24 +43,12 @@ export class Solution34 extends AbstractSolution {
     private isCuriousNumber(n: number): boolean {
 
         //keep dividing by 10 and mod until we get all digits
-        const digits = [];
+        let sum = 0;
         let dN = n;
         while (dN > 0) {
             const digit = dN % 10;
-            digits.push(digit);
+            sum += this.factorials[digit];
             dN = Math.floor(dN / 10);
-        }
-        
-
-        let sum = 0;
-        for (let i=0; i<digits.length; i++) {
-            if (sum > n) {
-                return false;
-            }
-
-            sum += this.factorials[
-                digits[i]
-            ];
         }
         return sum === n;
     

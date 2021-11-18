@@ -14,6 +14,13 @@ export class Solution93 extends AbstractSolution {
         return this.doSolve();
     }
 
+    /**
+     * Basic approach:
+     * 1. Generate sets of 4 different digits
+     * 2. Get permutations of the orders in each set
+     * 3. For each perm, apply all possible operations in all possible orders
+     * 4. Return best result
+     */
     private doSolve(): string {
         let digits: number[] = [];
         let longestConsecutive = 0;

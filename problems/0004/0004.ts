@@ -7,6 +7,11 @@ export class Solution4 extends AbstractSolution {
         return "Largest Palindrome Product";
     }
 
+    /**
+     * The product of two 3-digit numbers will have 5 or 6 digits
+     * Find the largest for both, then take the max
+     * @returns 
+     */
     protected solve(): number {
         const largestFive = this.doSolve(5, 3);
         const largestSix = this.doSolve(6, 3);
@@ -14,14 +19,14 @@ export class Solution4 extends AbstractSolution {
     }
 
     private doSolve(numDigits: number, subNumDigit: number): number {
-        let palindromicNumbers = this.listPalindromicNumberString(numDigits).map(
-            numStr => Integer.fromString(numStr)
-        );
+        let palindromicNumbers = this.listPalindromicNumberString(numDigits);
         palindromicNumbers = palindromicNumbers
             .reverse();
 
-        const largestPalindrome = palindromicNumbers.find(integer => {
-            const factors = integer.getUniqueFactors();
+        //find the largest string which matches the conditions
+        const largestPalindrome = palindromicNumbers.find(intStr => {
+            const integer = parseInt(intStr);
+            const factors = Integer.getUniqueFactors(integer);
             const nDigits = factors.filter(factor => {
                 return factor.toString().length === subNumDigit;
             });
@@ -30,7 +35,7 @@ export class Solution4 extends AbstractSolution {
                 const iItem = nDigits[i];
                 for (let j = 0; j < nDigits.length; j++) {
                     const jItem = nDigits[j];
-                    if (iItem.value * jItem.value === integer.value) {
+                    if (iItem * jItem === integer) {
                         return true;
                     }
                 }
@@ -38,9 +43,16 @@ export class Solution4 extends AbstractSolution {
             return false;
         });
 
-        return largestPalindrome!.value;
+        return parseInt(largestPalindrome!);
     }
 
+    /**
+     * Generate a list of palindromic numbers with numDigits
+     * This will return an array of strings
+     * @param numDigits 
+     * @param includeZero 
+     * @returns 
+     */
     private listPalindromicNumberString(numDigits: number, includeZero = false): string[] {
         //Even: 9 * numDigits/2
         //Odd: 9 * numDigits/2 + 9

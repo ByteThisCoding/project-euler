@@ -13,14 +13,13 @@ export class Fibonacci extends AbstractSequence<bigint> {
     }
 
     protected getInitialSequenceItems(): bigint[] {
-        return [1n, 1n];
+        return [1n, 1n, 2n];
     }
 
     protected calculateNthItem(n: number): bigint {
         const left = this.getNthItem(n - 2);
         const right = this.getNthItem(n - 1);
-        //@ts-ignore
-        return BigInt(left) + BigInt(right);
+        return left + right;
     }
 
     public static getNthFibonacciItem(n: number): bigint {

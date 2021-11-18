@@ -13,6 +13,12 @@ export class Solution10 extends AbstractSolution {
         return this.doSolve(2000000);
     }
 
+    /**
+     * Iterate over the primes until we pass our limit
+     * The iteration logic is implemented in primes.ts
+     * @param limit 
+     * @returns 
+     */
     private doSolve(limit: number): number {
         let sum = 0;
         Primes.iterateOverPrimes((prime, stop) => {

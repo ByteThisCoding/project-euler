@@ -11,6 +11,10 @@ export class Solution19 extends AbstractSolution {
         return this.doSolve();   
     }
 
+    /**
+     * Iterate over the months of each year in question
+     * @returns 
+     */
     private doSolve(): number {
         let numSundays = 0;
 
@@ -38,12 +42,6 @@ export class Solution19 extends AbstractSolution {
                     numSundays ++;
                 }
 
-                /*console.log({
-                    year,
-                    month,
-                    lastMonthStartDay,
-                    thisMonthStartDay
-                })*/
                 lastMonthStartDay = thisMonthStartDay;
             }
         }
@@ -51,12 +49,21 @@ export class Solution19 extends AbstractSolution {
         return numSundays;
     }
 
+    /**
+     * Get the day of the week the next month will start on
+     * @param currentYear 
+     * @param currentMonth 
+     * @param previousMonthStartDay 
+     * @returns 
+     */
     private getNextMonthStartDay(
         currentYear: number,
         currentMonth: number,
         previousMonthStartDay: number,
     ): number {
         let numDaysInCurrentMonth: number;
+
+        //switch over current month to decide how many days in that month
         switch (currentMonth) {
             case 2:
                 numDaysInCurrentMonth = 28 +
@@ -76,14 +83,14 @@ export class Solution19 extends AbstractSolution {
         }
 
         const nextDay = ((numDaysInCurrentMonth % 7) + previousMonthStartDay) % 7;
-        /*console.log({
-            numDaysInCurrentMonth,
-            previousMonthStartDay,
-            nextDay
-        });*/
         return nextDay;
     }
 
+    /**
+     * Check if any given year is a leap year using the logic given in the problem
+     * @param currentYear 
+     * @returns 
+     */
     private isLeapYear(currentYear: number): boolean {
         return currentYear % 4 === 0
             && (

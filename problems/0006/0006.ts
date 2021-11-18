@@ -33,6 +33,12 @@ export class Solution6 extends AbstractSolution {
         return addSquare - squareAdd;
     }
 
+    /**
+     * This implementation is not as efficient
+     * We've left it here for reference purposes
+     * @param limit 
+     * @returns 
+     */
     private bruteForceSolve(limit: number): number {
         let squareAdd: number = 1;
         let addSquare: number = 1;

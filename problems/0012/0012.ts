@@ -14,6 +14,7 @@ export class Solution12 extends AbstractSolution {
 
     private smartBruteForceSolve(): number {
 
+        //we can start here to reduce the search space
         const startTriangleIndex = 353;
 
         let lastTriangleNum: number = -1
@@ -21,6 +22,7 @@ export class Solution12 extends AbstractSolution {
         for (let n = startTriangleIndex; lastNumFactors < 501; n ++) {
 
             lastTriangleNum = this.getNthTriangleNumber(n);
+            //get the number of factors so the loop can compare against the target
             lastNumFactors = Integer.getUniqueFactors(lastTriangleNum).length;
 
         }
@@ -29,6 +31,12 @@ export class Solution12 extends AbstractSolution {
         return lastTriangleNum;
     }
 
+    /**
+     * We've moved this to its own method to provide
+     *      greater clarity for demo purposes
+     * @param n 
+     * @returns 
+     */
     private getNthTriangleNumber(n: number): number {
         return (n*n+n)/2;
     }

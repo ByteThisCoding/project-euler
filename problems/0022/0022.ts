@@ -5,6 +5,10 @@ import fs from "fs";
 @RunSolution
 export class Solution22 extends AbstractSolution {
 
+    /**
+     * We'll use a sorted array to guarantee the array remains sorted as we make insertions
+     * This saves time as opposed to sorting the array afterwords
+     */
     private words = new SortedArray(
         SortedArray.compareStrings
     );
@@ -13,6 +17,10 @@ export class Solution22 extends AbstractSolution {
         return "Names Scores";
     }
 
+    /**
+     * Read in words, sort as we insert, then calc sum
+     * @returns 
+     */
     protected async solve(): Promise<number> {
         await this.readFile(__dirname+"/names.txt");
     
@@ -29,10 +37,20 @@ export class Solution22 extends AbstractSolution {
         return sum;
     }
 
+    /**
+     * For each character:
+     *      map to the letter number as described in the problem and add up
+     * @param word 
+     * @returns 
+     */
     private calcWordCharSum(word: string): number {
-        return Array.from(word).reduce((acc, char) => {
-            return acc + char.toUpperCase().charCodeAt(0) - 64;
-        }, 0);
+        let acc = 0;
+        for (let i=0; i<word.length; i++) {
+            acc += word.charCodeAt(i) - 64;
+        }
+
+        return acc;
+
     }
 
     private async readFile(fileName: string): Promise<void> {

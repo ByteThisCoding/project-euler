@@ -1,3 +1,4 @@
+import { Primes } from "../../utils/primes";
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 
 @RunSolution
@@ -8,11 +9,7 @@ export class Solution3 extends AbstractSolution {
     }
 
     protected solve() {
-        return this.doSolve(600851475143);
-    }
-
-    private doSolve(input: number): number {
-        return this.getLargestPrimeFactor(input);
+        return this.getLargestPrimeFactor(600851475143);
     }
 
     private getLargestPrimeFactor(int: number): number {
@@ -21,13 +18,22 @@ export class Solution3 extends AbstractSolution {
 
         const loopLimit: number = Math.sqrt(int);
         for (let i=2; i<=loopLimit; i++) {
-            if (int % i === 0 && this.isPrime(i)) {
+            if (int % i === 0 && Primes.isPrime(i)) {
                 largestPrime = i;
             }
         }
         return largestPrime;
     }
 
+    /**
+     * This is the original implementation of the "isPrime" method
+     * The code above has been updated to use the version in "Primes" class
+     *      which is more efficient.
+     * 
+     * This is kept here for reference purposes
+     * @param int 
+     * @returns 
+     */
     private isPrime(int: number): boolean {
         let isPrime = true;
 

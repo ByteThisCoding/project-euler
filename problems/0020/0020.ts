@@ -7,35 +7,32 @@ export class Solution20 extends AbstractSolution {
         return "Factorial Digit Sum";
     }
     
-    protected solve(): bigint {
-        return this.doSolve(9876, "string");
-        //return this.doSolve(9876, "number");
+    protected solve(): number {
+        return this.doSolve(100);
     }
 
-    private doSolve(limit: number, mode: "string" | "number"): bigint {
+    /**
+     * 1. Multiply out the factorial
+     * 2. Convert to a string
+     * 3. Iterate over string
+     * 4. For each char, parseInt and add to sum
+     * @param limit 
+     * @returns 
+     */
+    private doSolve(limit: number): number {
 
         let bigProduct = 1n;
-
         for (let i=2n; i<=limit; i++) {
             bigProduct *= i;
         }
 
-        let bigSum = 0n;
-        if (mode === "string") {
-            let digits = Array.from(bigProduct.toString()).map(str => {
-                return BigInt(str);
-            });
-            bigSum = digits.reduce((acc, digit) => acc + digit);
-        } else {
-            let workingProduct = bigProduct;
-            while (workingProduct >= 10n) {
-                bigSum += workingProduct % 10n;
-                workingProduct = workingProduct / 10n;
-            }
-            bigSum += workingProduct;
+        const bigStr = bigProduct.toString();
+        let sum = 0;
+        for (let i=0; i<bigStr.length; i++) {
+            sum += parseInt(bigStr[i]);
         }
 
-        return bigSum;
+        return sum;
     }
 
 }

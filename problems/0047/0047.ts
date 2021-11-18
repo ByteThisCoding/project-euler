@@ -13,6 +13,10 @@ export class Solution47 extends AbstractSolution {
         return this.doSolve(4);
     }
 
+    /**
+     * This implementation lets us accept the numDistinct as a parameter
+     * We can test using 2 and 3 against the example, then set to 4 to solve
+     */
     private doSolve(numDistinct: number): number {
         for (let i=2; true; i+=numDistinct) {
             const numDistinctPrimes = Integer.getNumDistinctPrimes(i);

@@ -31,21 +31,23 @@ export class Solution8 extends AbstractSolution {
     }
 
     protected solve(): number {
-        //23514624000
-        //23514624000
-        return this.bruteForceSolve(this.INPUT, 50);
-        //return this.smartBruteForceSolve(this.INPUT, 50);
+        //return this.bruteForceSolve(this.INPUT, 13);
+        return this.smartBruteForceSolve(this.INPUT, 13);
     }
 
     private smartBruteForceSolve(input: string, length: number): number {
         let workingProduct: number = 0;
 
+        //for each starting position up to input length - seq length
         for (let i=0; i<input.length - length; i++) {
+            //get the substring of this sequence
             const sub = input.substring(i, i+length);
+            //initialize product, parse each digit, and multiply
             let innerProduct: number = 1;
             for (let j=0; innerProduct > 0 && j<sub.length; j++) {
                 const char = sub[j];
                 const digit = parseInt(char);
+                //if the digit is 0, we can skip a few iterations to move past it
                 if (digit === 0) {
                     i += j;
                 }
@@ -57,6 +59,13 @@ export class Solution8 extends AbstractSolution {
         return workingProduct;
     }
 
+    /**
+     * This is not the best solution
+     * We've left it here for reference purposes
+     * @param input 
+     * @param length 
+     * @returns 
+     */
     private bruteForceSolve(input: string, length: number): number {
 
         let workingProduct: number = 0;

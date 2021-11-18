@@ -118,17 +118,12 @@ export class Solution13 extends AbstractSolution {
     }
 
     protected solve(): string {
-        const bigInts: BigInt[] = this.INPUT.map(nStr => BigInt(nStr));
-
-        const sum = bigInts.reduce((acc, int) => {
-            //@ts-ignore
-            return acc + int;
-        });
-
-        return sum.toString().substring(0, 10);
-
+        //iterate over the strings
+        //reduce will carry calcuations in "acc" throughout
+        return this.INPUT.reduce((acc, nStr) => {
+            //convert the string into a bigint, then add
+            return acc + BigInt(nStr);
+        //at the end, turn the result into a string and grab substr
+        }, 0n).toString().substring(0, 10);
     }
-
-
-
 }

@@ -20,7 +20,13 @@ export class Solution26 extends AbstractSolution {
         return longestRecurN;
     }
 
+    /**
+     * We'll use long devision to detect cycles
+     * @param denominator of the fraction. Numerator is assumed to be 1 
+     * @returns 
+     */
     private findRecurring(denom: number): number {
+        //use a set to check values and see when we hit a cycle
         const seqValues = new Set<string>();
 
         let prevValues = {
@@ -47,6 +53,7 @@ export class Solution26 extends AbstractSolution {
             };
             const newEntryStr = `${seqDigit},${subResult}`;
             
+            //if the sequence has this already, we've just concluded a cycle
             if (seqValues.has(newEntryStr)) {
                 break;
             } else {
@@ -59,7 +66,7 @@ export class Solution26 extends AbstractSolution {
     }
 
     /***
-     * 
+     * Example of long division concept:
      * 
      * 1/3
      * 

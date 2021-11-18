@@ -7,10 +7,14 @@ export class Solution1 extends AbstractSolution {
         return "Multiples of 3 or 5";
     }
 
+    /**
+     * The commented out code used less efficient methods
+     * We're keeping those here for reference and for comparison with the "SmarterSolve" method
+     */
     protected solve() {
-        //return this.bruteForceSolve(9876543);
-        //return this.smartSolve(9876543);
-        return this.smarterSolve(9876543);
+        //return this.bruteForceSolve(1000);
+        //return this.smartSolve(1000);
+        return this.smarterSolve(1000);
     }
 
     /**

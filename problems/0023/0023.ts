@@ -33,8 +33,15 @@ export class Solution23 extends AbstractSolution {
         return nonAbundantSum;
     }
 
+    /**
+     * Filter the sorted list to get numbers in range
+     * Then, check if the set has the subtraction
+     * @param n 
+     * @returns 
+     */
     private isSumOfTwoAbundantNumbers(n: number): boolean {
-        const subAbundants = this.abundantNumbersList.filter(num => num <= n/2);
+        const nDiv = n/2;
+        const subAbundants = this.abundantNumbersList.filter(num => num <= nDiv);
         for (let subN of subAbundants) {
             if (this.abundantNumbersSet.has(n - subN)) {
                 return true;
@@ -43,6 +50,11 @@ export class Solution23 extends AbstractSolution {
         return false;
     }
 
+    /**
+     * Check if the number is abundant as per the problem description
+     * @param n 
+     * @returns 
+     */
     private isAbundant(n: number): boolean {
         const factors = Integer.getUniqueFactors(n);
         

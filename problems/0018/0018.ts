@@ -39,6 +39,15 @@ export class Solution18 extends AbstractSolution {
         return this.calcBranch(this.INPUT, 0, 0);
     }
 
+    /**
+     * Recursive implementation
+     * We'll branch out in the available paths
+     * Using a cache enables us to avoid exploring subtrees more than once
+     * @param input 
+     * @param rowIndex 
+     * @param columnIndex 
+     * @returns 
+     */
     private calcBranch(input: number[][], rowIndex: number, columnIndex: number): number {
 
         let sum = 0;

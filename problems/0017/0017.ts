@@ -3,6 +3,14 @@ import { AbstractSolution, RunSolution } from "../../utils/solution";
 @RunSolution
 export class Solution17 extends AbstractSolution {
 
+    /**
+     * This is an array which has a function in each index
+     * ar[0] = num letters for any value < 10
+     * ar[1] = num letters for any value < 100
+     * etc...
+     * 
+     * Higher functions will use lower functions for those parts of the value
+     */
     numWordsMap: ((value: number) => number)[] = [
         //where order of mangitude = 0
         (value: number): number => {
@@ -88,11 +96,6 @@ export class Solution17 extends AbstractSolution {
     }
 
     protected solve(): number {
-        return this.doSolve();
-
-    }
-
-    private doSolve(): number {
         let totalNumLetters = 0;
         for (let n = 1; n < 1000; n++) {
             totalNumLetters += this.numWordsMap[2](n);

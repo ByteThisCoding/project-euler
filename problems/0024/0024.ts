@@ -11,6 +11,12 @@ export class Solution24 extends AbstractSolution {
         return this.getPermutation(1000000 - 1, [0,1,2,3,4,5,6,7,8,9]);
     }
 
+    /**
+     * Recursive implementation
+     * @param index 
+     * @param seq 
+     * @returns 
+     */
     private getPermutation(index: number, seq: number[]): string {
         if (seq.length === 0) {
             return "";
