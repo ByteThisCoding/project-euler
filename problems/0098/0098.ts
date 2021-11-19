@@ -185,7 +185,7 @@ export class Solution98 extends AbstractSolution {
      */
     private async readWords(callback: (word: string) => any) {
         return new Promise(resolve => {
-            var readable = fs.createReadStream("words.txt", {
+            var readable = fs.createReadStream(__dirname+"/words.txt", {
                 encoding: 'utf8'
             });
             readable.on('readable', function () {
