@@ -1,4 +1,3 @@
-import { SortedArray } from "@byte-this/collections";
 import { Primes } from "../../utils/primes";
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 

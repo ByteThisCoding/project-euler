@@ -1,5 +1,5 @@
 import { AbstractSolution, RunSolution } from "../../utils/solution";
-import { SortedArray } from "@byte-this/collections";
+import { AvlSortedList } from "@byte-this/collections";
 import fs from "fs";
 
 @RunSolution
@@ -9,8 +9,8 @@ export class Solution22 extends AbstractSolution {
      * We'll use a sorted array to guarantee the array remains sorted as we make insertions
      * This saves time as opposed to sorting the array afterwords
      */
-    private words = new SortedArray(
-        SortedArray.compareStrings
+    private words = new AvlSortedList(
+        AvlSortedList.compareStrings
     );
 
     getProblemName(): string {

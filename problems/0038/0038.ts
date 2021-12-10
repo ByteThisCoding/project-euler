@@ -1,4 +1,4 @@
-import { SortedArray } from "@byte-this/collections";
+import { AvlSortedList } from "@byte-this/collections";
 import { Equals } from "@byte-this/funscript";
 import { AbstractSolution, RunSolution } from "../../utils/solution";
 
@@ -43,8 +43,8 @@ export class Solution38 extends AbstractSolution {
         const [minM, maxM] = this.minMaxMs[numDigitsX];
 
         let xMultiples: number[] = [x];
-        let multiplierDigits = new SortedArray<string>(
-            SortedArray.compareStrings,
+        let multiplierDigits = new AvlSortedList<string>(
+            AvlSortedList.compareStrings,
             Array.from(`${x}`)
         );
         for (let m = 2; m<=maxM; m++) {
@@ -54,7 +54,7 @@ export class Solution38 extends AbstractSolution {
                 Array.from(`${mMultiple}`)
             );
             if (m >= minM && multiplierDigits.length >= 9) {
-                const isSame = Equals(multiplierDigits.toArray(), this.sortedDigits);
+                const isSame = multiplierDigits.length === this.sortedDigits.length && Equals(multiplierDigits.toArray(), this.sortedDigits);
                 return isSame ? parseInt(xMultiples.join("")) : -1;
             }
         }
